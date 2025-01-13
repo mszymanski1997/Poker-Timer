@@ -28,14 +28,17 @@ const rebuysInput = document.querySelector('.rebuys-input');
 const startingStackInput = document.querySelector('.starting-stack-input');
 const playersInInput = document.querySelector('.players-in-input');
 const confirmBtn = document.querySelector('.confirm-btn');
-const addBreakBtn = document.querySelector('.break');
-const breakPopup = document.querySelector('.break-popup');
-// Blind settings
 const addBtn = document.querySelector('.add-btn');
+// Blind settings
 const deleteBtn = document.querySelector('.delete-btn');
 const bigBlindInput = document.querySelector('.big-blind-input');
 const smallBlindInput = document.querySelector('.small-blind-input');
+// Break-popup settings
+const addBreakBtn = document.querySelector('.break');
+const breakPopup = document.querySelector('.break-popup');
 const durationInput = document.querySelector('.duration-input');
+const cancelBreakBtn = document.querySelector('.delete-break-btn');
+const addBreakToSettingsBtn = document.querySelector('.add-break-btn');
 
 const blindsData = {
 	bigBlind: [],
@@ -45,6 +48,10 @@ const blindsData = {
 
 const audioPokerChips = document.querySelector('.audio');
 const audioChangeBlind = document.querySelector('.ding-audio');
+
+let i = 0;
+let time = 25 * 60;
+let timerInterval;
 
 // Funkcja pokazuje ustawienia
 const showSettings = () => {
@@ -138,11 +145,7 @@ const removeBlinds = (e) => {
 	e.target.closest('div').remove();
 };
 
-let i = 0;
-let time = 25 * 60;
-let timerInterval;
-
-// Funkcja obsługuje zarządzenie btn play/pause 
+// Funkcja obsługuje zarządzenie btn play/pause
 const handlePlayBtn = () => {
 	if (playIcon.classList.contains('fa-play')) {
 		playIcon.classList.remove('fa-play');
@@ -155,7 +158,7 @@ const handlePlayBtn = () => {
 	}
 };
 
-// Funkcja dodaje nowe blindy w ustawieniach 
+// Funkcja dodaje nowe blindy w ustawieniach
 const addNewBlinds = () => {
 	let newBlinds = document.createElement('div');
 	newBlinds.setAttribute('class', 'blinds-settings');
@@ -187,7 +190,7 @@ const addNewBlinds = () => {
 	});
 };
 
-// Funkcja odpowiada za dzaiałanie timera 
+// Funkcja odpowiada za dzaiałanie timera
 const countTime = () => {
 	let minutes = Math.floor(time / 60);
 	let seconds = time % 60;
@@ -210,7 +213,7 @@ const countTime = () => {
 	}
 };
 
-// Funkcja obsługuje rewindBtn 
+// Funkcja obsługuje rewindBtn
 const handleRewidnBtn = () => {
 	if (i <= 0) {
 		return;
@@ -228,7 +231,7 @@ const handleRewidnBtn = () => {
 	checkRewindBtn();
 };
 
-// Funkcja obsługuje forwardBtn 
+// Funkcja obsługuje forwardBtn
 const handleForwardBtn = () => {
 	if (i + 1 >= blindsData.duration.length) {
 		return;
@@ -252,7 +255,7 @@ const handleForwardBtn = () => {
 	}
 };
 
-// Funkcja przełącza blindy na następne 
+// Funkcja przełącza blindy na następne
 const changeBlinds = () => {
 	if (i >= blindsData.bigBlind.length && i > 0) {
 		timerCounter.textContent = 'GAME OVER';
@@ -277,9 +280,16 @@ const changeBlinds = () => {
 	}
 };
 
-// Funkcja zarząda popupem do przerw
+// Funkcja otwiera popup do przerw
 const openBreakPopup = () => {
-	breakPopup.classList.toggle('inactive');
+	breakPopup.showModal();
+	breakPopup.classList.remove('inactive');
+};
+
+// Funkcja zamyka -||-
+const closeBreakPopup = () => {
+	breakPopup.classList.add('inactive');
+	breakPopup.close();
 };
 
 checkRewindBtn();
@@ -291,3 +301,4 @@ playBtn.addEventListener('click', handlePlayBtn);
 forwardBtn.addEventListener('click', handleForwardBtn);
 rewindBtn.addEventListener('click', handleRewidnBtn);
 addBreakBtn.addEventListener('click', openBreakPopup);
+cancelBreakBtn.addEventListener('click', closeBreakPopup);

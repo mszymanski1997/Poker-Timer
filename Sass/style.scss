@@ -169,14 +169,12 @@ body {
 }
 
 .settings {
-	overflow: hidden;
 	position: absolute;
 	top: 0;
 	left: 0;
 	width: 100%;
 	min-height: 100%;
 	height: 100%;
-	background-color: red;
 	transform: translateX(100%);
 	background-image: url('https://cdn.pixabay.com/photo/2016/03/13/11/47/roulette-1253626_1280.jpg');
 	background-size: cover;
@@ -185,15 +183,15 @@ body {
 	justify-content: center;
 	align-items: center;
 	color: $main-light;
-	// animation: settings-move 2s forwards;
+	animation: settings-move 2s forwards;
 }
 
 .settings-container {
-	overflow: scroll;
+	overflow-y: auto;
 	margin-top: 20px;
 	min-height: 95%;
 	height: 95%;
-	width: 60%;
+	width: 45%;
 	@include container-style;
 	border-radius: 12px;
 	background-color: lighten($main-dark, 5%);
@@ -297,8 +295,8 @@ body {
 
 	label {
 		p {
-			margin-bottom: 10px;
-			font-size: 18px;
+			margin-bottom: 5px;
+			font-size: 15px;
 			margin-left: 5px;
 		}
 
@@ -313,6 +311,7 @@ body {
 	}
 
 	&__btn {
+		position: relative;
 		@include container-style;
 		border-radius: 12px;
 		height: 60%;
@@ -323,7 +322,7 @@ body {
 		cursor: pointer;
 		transition: scale 0.3s;
 		color: $main-light;
-		font-size: 16px;
+		font-size: 17px;
 		font-weight: bold;
 
 		&:hover {
@@ -333,6 +332,10 @@ body {
 		i {
 			color: $main-light;
 			font-size: 25px;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
 		}
 	}
 }
@@ -370,6 +373,7 @@ body {
 			margin-bottom: 10px;
 			font-size: 22px;
 			margin-left: 5px;
+			color: #fff;
 		}
 
 		input {

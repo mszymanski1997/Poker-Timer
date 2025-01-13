@@ -99,11 +99,12 @@
                 <button class="blinds-settings__btn add-btn">ADD</button>
                 <button class="blinds-settings__btn break">ADD BREAK</button>
                 <button class="blinds-settings__btn delete-btn"><i class="fa-solid fa-xmark"></i></button>
+
             </div>
         </div>
 
-        <div class="break-popup 
-        inactive">
+        <dialog class="break-popup inactive
+        ">
             <label>
                 <p>Break duration:</p>
                 <input type="number" class="duration-input" min="0" step="10">
@@ -112,7 +113,7 @@
                 <button class="blinds-settings__btn delete-break-btn"><i class="fa-solid fa-xmark"></i></button>
                 <button class="blinds-settings__btn add-break-btn"><i class="fa-solid fa-check"></i></button>
             </div>
-        </div>
+        </dialog>
     </div>
 
     <audio src="./audio/poker_chips1.wav" class="audio"></audio>
