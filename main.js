@@ -1,4 +1,4 @@
-import { variables } from './JS/variables.js';
+import { variables } from './js/variables.js';
 const {
 	nextBlinds,
 	averageStack,
@@ -269,4 +269,4 @@ deleteBtn.addEventListener('click', removeBlinds);
 playBtn.addEventListener('click', handlePlayBtn);
 forwardBtn.addEventListener('click', handleForwardBtn);
 rewindBtn.addEventListener('click', handleRewidnBtn);
-addBreakBtn.addEventListener('click', openBreakPopup)
+addBreakBtn.addEventListener('click', openBreakPopup);
