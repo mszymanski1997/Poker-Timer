@@ -1,48 +1,58 @@
-import { variables } from './js/variables.js';
-const {
-	nextBlinds,
-	averageStack,
-	buyIns,
-	rebuys,
-	totalChips,
-	timerCounter,
-	currentBlinds,
-	playBtn,
-	pauseBtn,
-	settingsBtn,
-	playersIn,
-	totalMoney,
-	firstReward,
-	secondReward,
-	settings,
-	buyInsInput,
-	buyInValueInput,
-	rebuysInput,
-	startingStackInput,
-	playersInInput,
-	confirmBtn,
-	addBtn,
-	deleteBtn,
-	bigBlindInput,
-	smallBlindInput,
-	durationInput,
-	settingsContainer,
-	playIcon,
-	forwardBtn,
-	rewindBtn,
-	blindsData,
-	audioPokerChips,
-	audioChangeBlind,
-	currentBlindsP,
-	addBreakBtn,
-	breakPopup,
-} = variables;
+// Main page - left list
+const nextBlinds = document.querySelector('.next-blinds');
+const averageStack = document.querySelector('.average-stack');
+const buyIns = document.querySelector('.buy-ins');
+const rebuys = document.querySelector('.rebuys');
+const totalChips = document.querySelector('.total-chips');
+// Main page - timer
+const timerCounter = document.querySelector('.timer__counter');
+const currentBlinds = document.querySelector('.current-blinds');
+const currentBlindsP = document.querySelector('.current-blinds-text');
+const playBtn = document.querySelector('.play-btn');
+const pauseBtn = document.querySelector('.pause-btn');
+const settingsBtn = document.querySelector('.settings-btn');
+const rewindBtn = document.querySelector('.rewind-btn');
+const forwardBtn = document.querySelector('.forward-btn');
+const playIcon = document.querySelector('#play-icon');
+// Main page - right list
+const playersIn = document.querySelector('.players-in');
+const totalMoney = document.querySelector('.total-money');
+const firstReward = document.querySelector('.first-reward');
+const secondReward = document.querySelector('.second-reward');
+//  Settings
+const settings = document.querySelector('.settings');
+const settingsContainer = document.querySelector('.settings-container');
+const buyInsInput = document.querySelector('.buy-ins-input');
+const buyInValueInput = document.querySelector('.buy-in-value-input');
+const rebuysInput = document.querySelector('.rebuys-input');
+const startingStackInput = document.querySelector('.starting-stack-input');
+const playersInInput = document.querySelector('.players-in-input');
+const confirmBtn = document.querySelector('.confirm-btn');
+const addBreakBtn = document.querySelector('.break');
+const breakPopup = document.querySelector('.break-popup');
+// Blind settings
+const addBtn = document.querySelector('.add-btn');
+const deleteBtn = document.querySelector('.delete-btn');
+const bigBlindInput = document.querySelector('.big-blind-input');
+const smallBlindInput = document.querySelector('.small-blind-input');
+const durationInput = document.querySelector('.duration-input');
 
+const blindsData = {
+	bigBlind: [],
+	smallBlind: [],
+	duration: [],
+};
+
+const audioPokerChips = document.querySelector('.audio');
+const audioChangeBlind = document.querySelector('.ding-audio');
+
+// Funkcja pokazuje ustawienia
 const showSettings = () => {
 	settings.classList.remove('animation-hide-start');
 	settings.classList.add('animation-start');
 };
 
+// Funkcja uzupełnia tablice z blindami i ich długością, nadpisuje zmienną time
 const fillBlindsObject = () => {
 	blindsData.bigBlind = [];
 	blindsData.smallBlind = [];
@@ -66,12 +76,14 @@ const fillBlindsObject = () => {
 	time = blindsData.duration[i] * 60;
 };
 
+// Funkcja sprawdza czy w tablicach już coś jest, jeśli nie to wyłącza btn do ich cofania
 const checkRewindBtn = () => {
 	if (i == 0) {
 		rewindBtn.disabled = true;
 	}
 };
 
+// Funkcja chowa ustawienia, sprawdza czy można je dalej edytować, jeśli tak to pokazuje je na strone. Daje też zabezpieczenie że jeżeli następny blind nie jest określony to dodaje ostrzeżenie
 const hideSettings = () => {
 	settings.classList.remove('animation-start');
 	setValues();
@@ -94,6 +106,7 @@ const hideSettings = () => {
 	}
 };
 
+// Funkcja umieszcza wartości po bokach timera
 const setValues = () => {
 	buyIns.textContent = buyInsInput.value;
 	rebuys.textContent = rebuysInput.value;
@@ -120,6 +133,7 @@ const setValues = () => {
 	secondReward.textContent = `2. ${Math.round(totalMoneyValue * 0.3)}zł`;
 };
 
+// Funkcja usuwa blindy w ustawieniach ale tylko wizualnie
 const removeBlinds = (e) => {
 	e.target.closest('div').remove();
 };
@@ -128,6 +142,7 @@ let i = 0;
 let time = 25 * 60;
 let timerInterval;
 
+// Funkcja obsługuje zarządzenie btn play/pause 
 const handlePlayBtn = () => {
 	if (playIcon.classList.contains('fa-play')) {
 		playIcon.classList.remove('fa-play');
@@ -140,6 +155,7 @@ const handlePlayBtn = () => {
 	}
 };
 
+// Funkcja dodaje nowe blindy w ustawieniach 
 const addNewBlinds = () => {
 	let newBlinds = document.createElement('div');
 	newBlinds.setAttribute('class', 'blinds-settings');
@@ -171,6 +187,7 @@ const addNewBlinds = () => {
 	});
 };
 
+// Funkcja odpowiada za dzaiałanie timera 
 const countTime = () => {
 	let minutes = Math.floor(time / 60);
 	let seconds = time % 60;
@@ -193,6 +210,7 @@ const countTime = () => {
 	}
 };
 
+// Funkcja obsługuje rewindBtn 
 const handleRewidnBtn = () => {
 	if (i <= 0) {
 		return;
@@ -210,6 +228,7 @@ const handleRewidnBtn = () => {
 	checkRewindBtn();
 };
 
+// Funkcja obsługuje forwardBtn 
 const handleForwardBtn = () => {
 	if (i + 1 >= blindsData.duration.length) {
 		return;
@@ -233,6 +252,7 @@ const handleForwardBtn = () => {
 	}
 };
 
+// Funkcja przełącza blindy na następne 
 const changeBlinds = () => {
 	if (i >= blindsData.bigBlind.length && i > 0) {
 		timerCounter.textContent = 'GAME OVER';
@@ -257,6 +277,7 @@ const changeBlinds = () => {
 	}
 };
 
+// Funkcja zarząda popupem do przerw
 const openBreakPopup = () => {
 	breakPopup.classList.toggle('inactive');
 };

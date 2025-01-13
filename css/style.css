@@ -13,6 +13,7 @@ body {
   height: 100vh;
   position: relative;
   font-family: "Roboto", system-ui;
+  overflow: hidden;
 }
 
 .container {
