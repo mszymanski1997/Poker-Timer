@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Poker Timer</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://kit.fontawesome.com/f2b6f63d65.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <div class="info-panel">
+            <h1 class="info-panel__title">Details</h1>
+            <ul class="info-panel__list">
+
+                <li>Next Blinds: <span class="next-blinds">20/10</span></li>
+                <li>Average stack: <span class="average-stack">0</span></li>
+                <li>Buy-ins: <span class="buy-ins">0</span></li>
+                <li>Rebuys: <span class="rebuys">0</span></li>
+                <li>Total chips: <span class="total-chips">0</span></li>
+            </ul>
+
+        </div>
+        <div class="timer">
+            <h1 class="timer__title">Poker Timer</h1>
+            <p class="timer__counter">25:00</p>
+            <p class="timer__current-blinds"><span class="current-blinds-text">Current Blinds:</span> <span
+                    class="current-blinds editable">10/5</span></p>
+            <div class="timer__buttons">
+                <button class="rewind-btn"><i class="fa-solid fa-backward"></i></button>
+                <button class="play-btn"><i class="fa-solid fa-play " id="play-icon"></i></button>
+                <button class="settings-btn"><i class="fa-solid fa-gear"></i></button>
+                <button class="forward-btn"><i class="fa-solid fa-forward"></i></button></button>
+            </div>
+        </div>
+        <div class="info-cash-panel">
+            <h1 class="info-cash-panel__title">Cash info</h1>
+            <ul class="info-cash-panel__list">
+                <li>Players-In <span class="players-in">0</span></li>
+                <li>Total money pot: <span class="total-money">0zł</span></li>
+                <li>Rewards: <span class="first-reward">1. 0zł</span> <span class="second-reward">2. 0zł</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="settings">
+        <div class="settings-container">
+
+            <h1 class="settings-container__title">Settings</h1>
+            <div class="settings-container__labels">
+                <label>
+                    <p>Buy-ins:</p>
+                    <input type="number" value="0" min="0" class="buy-ins-input">
+                </label>
+
+                <label>
+                    <p>Buy-in value:</p>
+                    <input type="number" value="0" min="0" class="buy-in-value-input">
+                </label>
+            </div>
+            <div class="settings-container__labels">
+                <label>
+                    <p>Rebuys:</p>
+                    <input type="number" value="0" min="0" class="rebuys-input">
+                </label>
+                <label>
+                    <p>Starting stack:</p>
+                    <input type="number" value="0" min="0" class="starting-stack-input">
+                </label>
+            </div>
+            <label class="solo-input">
+                <p>Players-In:</p>
+                <input type="number" value="0" min="0" class="players-in-input">
+            </label>
+
+            <button class="confirm-btn"><i class="fa-solid fa-check"></i></button>
+
+            <h1 class="settings-container__title">Blinds Settings</h1>
+
+            <div class="blinds-settings">
+                <label>
+                    <p>Big Blind:</p>
+                    <input type="number" class="big-blind-input">
+                </label>
+                <label>
+                    <p>Small Blind:</p>
+                    <input type="number" class="small-blind-input">
+                </label>
+                <label>
+                    <p>Duration:</p>
+                    <input type="number" class="duration-input" min="0" step="10">
+                </label>
+                <button class="blinds-settings__btn add-btn">ADD</button>
+                <button class="blinds-settings__btn break">ADD BREAK</button>
+                <button class="blinds-settings__btn delete-btn"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+        </div>
+
+        <div class="break-popup 
+        inactive">
+            <label>
+                <p>Break duration:</p>
+                <input type="number" class="duration-input" min="0" step="10">
+            </label>
+            <div class="break-popup__btns">
+                <button class="blinds-settings__btn delete-break-btn"><i class="fa-solid fa-xmark"></i></button>
+                <button class="blinds-settings__btn add-break-btn"><i class="fa-solid fa-check"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <audio src="./audio/poker_chips1.wav" class="audio"></audio>
+    <audio src="./audio/ding.wav" class="ding-audio"></audio>
+    <script src="main.js" type="module"></script>
+</body>
+
+</html>
