@@ -33,12 +33,9 @@ const addBtn = document.querySelector('.add-btn');
 const deleteBtn = document.querySelector('.delete-btn');
 const bigBlindInput = document.querySelector('.big-blind-input');
 const smallBlindInput = document.querySelector('.small-blind-input');
-// Break-popup settings
-const addBreakBtn = document.querySelector('.break');
-const breakPopup = document.querySelector('.break-popup');
-const durationInput = document.querySelector('.duration-input');
-const cancelBreakBtn = document.querySelector('.delete-break-btn');
-const addBreakToSettingsBtn = document.querySelector('.add-break-btn');
+// Btns adding blinds and breaks
+const addBlindBtn = document.querySelector('.settings-container__add-blind');
+const addBreakBtn = document.querySelector('.settings-container__add-break ');
 
 const blindsData = {
 	bigBlind: [],
@@ -162,8 +159,12 @@ const handlePlayBtn = () => {
 const addNewBlinds = () => {
 	let newBlinds = document.createElement('div');
 	newBlinds.setAttribute('class', 'blinds-settings');
-	newBlinds.innerHTML = ` <label>
+	newBlinds.innerHTML = `<label>
                     <p>Big Blind:</p>
+                    <input type="number" class="big-blind-input">
+                </label>
+                <label>
+                    <p>Ante:</p>
                     <input type="number" class="big-blind-input">
                 </label>
                 <label>
@@ -172,22 +173,22 @@ const addNewBlinds = () => {
                 </label>
                 <label>
                     <p>Duration:</p>
-                    <input type="number" class="duration-input">
+                    <input type="number" class="duration-input" min="0" step="10">
                 </label>
-                <button class="blinds-settings__btn add-btn">ADD</button>
-				<button class="blinds-settings__btn break">ADD BREAK</button>
+
                 <button class="blinds-settings__btn delete-btn"><i class="fa-solid fa-xmark"></i></button>`;
 	settingsContainer.appendChild(newBlinds);
+	settingsContainer.scrollTop = settingsContainer.scrollHeight;
 
-	const allAddBtns = document.querySelectorAll('.add-btn');
-	allAddBtns.forEach((addBtn) => {
-		addBtn.addEventListener('click', addNewBlinds);
-	});
+	// const allAddBtns = document.querySelectorAll('.add-btn');
+	// allAddBtns.forEach((addBtn) => {
+	// 	addBtn.addEventListener('click', addNewBlinds);
+	// });
 
-	const allDeleteBtns = document.querySelectorAll('.delete-btn');
-	allDeleteBtns.forEach((deleteBtn) => {
-		deleteBtn.addEventListener('click', removeBlinds);
-	});
+	// const allDeleteBtns = document.querySelectorAll('.delete-btn');
+	// allDeleteBtns.forEach((deleteBtn) => {
+	// 	deleteBtn.addEventListener('click', removeBlinds);
+	// });
 };
 
 // Funkcja odpowiada za dzaiałanie timera
@@ -280,25 +281,12 @@ const changeBlinds = () => {
 	}
 };
 
-// Funkcja otwiera popup do przerw
-const openBreakPopup = () => {
-	breakPopup.showModal();
-	breakPopup.classList.remove('inactive');
-};
-
-// Funkcja zamyka -||-
-const closeBreakPopup = () => {
-	breakPopup.classList.add('inactive');
-	breakPopup.close();
-};
-
 checkRewindBtn();
 settingsBtn.addEventListener('click', showSettings);
 confirmBtn.addEventListener('click', hideSettings);
-addBtn.addEventListener('click', addNewBlinds);
-deleteBtn.addEventListener('click', removeBlinds);
+// addBtn.addEventListener('click', addNewBlinds);
+// deleteBtn.addEventListener('click', removeBlinds);
 playBtn.addEventListener('click', handlePlayBtn);
 forwardBtn.addEventListener('click', handleForwardBtn);
 rewindBtn.addEventListener('click', handleRewidnBtn);
-addBreakBtn.addEventListener('click', openBreakPopup);
-cancelBreakBtn.addEventListener('click', closeBreakPopup);
+addBlindBtn.addEventListener('click', addNewBlinds);

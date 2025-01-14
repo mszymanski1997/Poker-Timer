@@ -83,9 +83,13 @@
 
             <h1 class="settings-container__title">Blinds Settings</h1>
 
-            <div class="blinds-settings">
+            <!-- <div class="blinds-settings">
                 <label>
                     <p>Big Blind:</p>
+                    <input type="number" class="big-blind-input">
+                </label>
+                <label>
+                    <p>Ante:</p>
                     <input type="number" class="big-blind-input">
                 </label>
                 <label>
@@ -96,24 +100,20 @@
                     <p>Duration:</p>
                     <input type="number" class="duration-input" min="0" step="10">
                 </label>
-                <button class="blinds-settings__btn add-btn">ADD</button>
-                <button class="blinds-settings__btn break">ADD BREAK</button>
+
                 <button class="blinds-settings__btn delete-btn"><i class="fa-solid fa-xmark"></i></button>
 
-            </div>
+            </div> -->
+            <!-- <div class="settings-container__break">
+                <p>Break</p>
+            </div> -->
+
+            <button class="settings-container__add-blind settings-container__btn">Add blind</button>
+            <button class="settings-container__add-break settings-container__btn">Add break</button>
+
         </div>
 
-        <dialog class="break-popup inactive
-        ">
-            <label>
-                <p>Break duration:</p>
-                <input type="number" class="duration-input" min="0" step="10">
-            </label>
-            <div class="break-popup__btns">
-                <button class="blinds-settings__btn delete-break-btn"><i class="fa-solid fa-xmark"></i></button>
-                <button class="blinds-settings__btn add-break-btn"><i class="fa-solid fa-check"></i></button>
-            </div>
-        </dialog>
+
     </div>
 
     <audio src="./audio/poker_chips1.wav" class="audio"></audio>
