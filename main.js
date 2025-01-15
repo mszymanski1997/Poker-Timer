@@ -52,6 +52,7 @@ let timerInterval;
 
 // Funkcja pokazuje ustawienia
 const showSettings = () => {
+	console.log('call');
 	settings.classList.remove('animation-hide-start');
 	settings.classList.add('animation-start');
 };
@@ -180,15 +181,10 @@ const addNewBlinds = () => {
 	settingsContainer.appendChild(newBlinds);
 	settingsContainer.scrollTop = settingsContainer.scrollHeight;
 
-	// const allAddBtns = document.querySelectorAll('.add-btn');
-	// allAddBtns.forEach((addBtn) => {
-	// 	addBtn.addEventListener('click', addNewBlinds);
-	// });
-
-	// const allDeleteBtns = document.querySelectorAll('.delete-btn');
-	// allDeleteBtns.forEach((deleteBtn) => {
-	// 	deleteBtn.addEventListener('click', removeBlinds);
-	// });
+	const allDeleteBtns = document.querySelectorAll('.blinds-settings__btn');
+	allDeleteBtns.forEach((deleteBtn) => {
+		deleteBtn.addEventListener('click', removeBlinds);
+	});
 };
 
 // Funkcja odpowiada za dzaiałanie timera
@@ -281,12 +277,35 @@ const changeBlinds = () => {
 	}
 };
 
+// Funkcja dodaje nową przerwe
+const addBreak = () => {
+	let newBlinds = document.createElement('div');
+	newBlinds.setAttribute('class', 'settings-container__break');
+	newBlinds.innerHTML = `<div class="input-field"><label for="break-length" class="break-label">Break length:</label>
+                    <input type="number" id="break-length" class="break-input" placeholder="Minutes">
+                </div>
+                <button class="settings-container__break-btn delete-btn">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>`;
+	settingsContainer.appendChild(newBlinds);
+	settingsContainer.scrollTop = settingsContainer.scrollHeight;
+
+	const allBreaksBtn = document.querySelectorAll(
+		'.settings-container__break-btn'
+	);
+
+	allBreaksBtn.forEach((btn) => btn.addEventListener('click', deleteBreak));
+};
+
+const deleteBreak = (e) => {
+	e.target.closest('.settings-container__break').remove();
+};
+
 checkRewindBtn();
 settingsBtn.addEventListener('click', showSettings);
 confirmBtn.addEventListener('click', hideSettings);
-// addBtn.addEventListener('click', addNewBlinds);
-// deleteBtn.addEventListener('click', removeBlinds);
 playBtn.addEventListener('click', handlePlayBtn);
 forwardBtn.addEventListener('click', handleForwardBtn);
 rewindBtn.addEventListener('click', handleRewidnBtn);
 addBlindBtn.addEventListener('click', addNewBlinds);
+addBreakBtn.addEventListener('click', addBreak);
