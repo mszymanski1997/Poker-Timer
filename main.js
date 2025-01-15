@@ -51,10 +51,10 @@ const audioChangeBlind = document.querySelector('.ding-audio');
 let i = 0;
 let time = 25 * 60;
 let timerInterval;
+let isValid = true;
 
 // Funkcja pokazuje ustawienia
 const showSettings = () => {
-	console.log('call');
 	settings.classList.remove('animation-hide-start');
 	settings.classList.add('animation-start');
 };
@@ -66,24 +66,33 @@ const fillBlindsObject = () => {
 	blindsData.smallBlind = [];
 	blindsData.duration = [];
 
+	const validInput = (input, min) => {
+		if (!input.value || input.value < min) {
+			isValid = false;
+			return min;
+		} else {
+			return input.value;
+		}
+	};
+
 	const allBigBlindInputs = document.querySelectorAll('.big-blind-input');
 	allBigBlindInputs.forEach((input) => {
-		blindsData.bigBlind.push(input.value);
+		blindsData.bigBlind.push(validInput(input, 1));
 	});
 
 	const allAnteInputs = document.querySelectorAll('.ante-input');
 	allAnteInputs.forEach((input) => {
-		blindsData.ante.push(input.value);
+		blindsData.ante.push(validInput(input, 0));
 	});
 
 	const allSmallBlindInputs = document.querySelectorAll('.small-blind-input');
 	allSmallBlindInputs.forEach((input) => {
-		blindsData.smallBlind.push(input.value);
+		blindsData.smallBlind.push(validInput(input, 1));
 	});
 
 	const allDurationInputs = document.querySelectorAll('.duration-input');
 	allDurationInputs.forEach((input) => {
-		blindsData.duration.push(input.value);
+		blindsData.duration.push(validInput(input, 1));
 	});
 
 	time = blindsData.duration[i] * 60;
@@ -98,12 +107,18 @@ const checkRewindBtn = () => {
 
 // Funkcja chowa ustawienia, sprawdza czy można je dalej edytować, jeśli tak to pokazuje je na strone. Daje też zabezpieczenie że jeżeli następny blind nie jest określony to dodaje ostrzeżenie
 const hideSettings = () => {
-	settings.classList.remove('animation-start');
-	setValues();
-	settings.classList.add('animation-hide-start');
-
 	if (currentBlinds.classList.contains('editable')) {
 		fillBlindsObject();
+
+		if (!isValid) {
+			console.log('Fill the inputs');
+			isValid = true;
+			return;
+		}
+
+		settings.classList.remove('animation-start');
+		setValues();
+		settings.classList.add('animation-hide-start');
 
 		timerCounter.textContent = `${blindsData.duration[0]}:00`;
 
@@ -284,19 +299,19 @@ const addNewBlinds = () => {
 	newBlinds.setAttribute('class', 'blinds-settings');
 	newBlinds.innerHTML = `<label>
                     <p>Big Blind:</p>
-                    <input type="number" class="big-blind-input">
+                    <input type="number" class="big-blind-input" >
                 </label>
                 <label>
                     <p>Ante:</p>
-                    <input type="number" class="ante-input">
+                    <input type="number" class="ante-input" >
                 </label>
                 <label>
                     <p>Small Blind:</p>
-                    <input type="number" class="small-blind-input">
+                    <input type="number" class="small-blind-input" m>
                 </label>
                 <label>
                     <p>Duration:</p>
-                    <input type="number" class="duration-input" min="0" step="10">
+                    <input type="number" class="duration-input"  step="10">
                 </label>
 
                 <button class="blinds-settings__btn delete-btn"><i class="fa-solid fa-xmark"></i></button>`;
