@@ -80,6 +80,7 @@ input[type=number]::-webkit-outer-spin-button {
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
+  position: relative;
 }
 .timer__title {
   font-size: 26px;
@@ -138,6 +139,16 @@ input[type=number]::-webkit-outer-spin-button {
 }
 .timer__buttons button .fa-pause {
   font-size: 33px;
+}
+.timer__ante {
+  position: absolute;
+  color: #e0e0e0;
+  font-size: 28px;
+  text-align: center;
+  margin-bottom: 50px;
+  bottom: 18%;
+  left: 51%;
+  transform: translateX(-50%);
 }
 
 .info-cash-panel {

@@ -8,6 +8,7 @@ const totalChips = document.querySelector('.total-chips');
 const timerCounter = document.querySelector('.timer__counter');
 const currentBlinds = document.querySelector('.current-blinds');
 const currentBlindsP = document.querySelector('.current-blinds-text');
+const currentAnte = document.querySelector('.current-ante');
 const playBtn = document.querySelector('.play-btn');
 const pauseBtn = document.querySelector('.pause-btn');
 const settingsBtn = document.querySelector('.settings-btn');
@@ -39,6 +40,7 @@ const addBreakBtn = document.querySelector('.settings-container__add-break ');
 
 const blindsData = {
 	bigBlind: [],
+	ante: [],
 	smallBlind: [],
 	duration: [],
 };
@@ -60,12 +62,18 @@ const showSettings = () => {
 // Funkcja uzupełnia tablice z blindami i ich długością, nadpisuje zmienną time
 const fillBlindsObject = () => {
 	blindsData.bigBlind = [];
+	blindsData.ante = [];
 	blindsData.smallBlind = [];
 	blindsData.duration = [];
 
 	const allBigBlindInputs = document.querySelectorAll('.big-blind-input');
 	allBigBlindInputs.forEach((input) => {
 		blindsData.bigBlind.push(input.value);
+	});
+
+	const allAnteInputs = document.querySelectorAll('.ante-input');
+	allAnteInputs.forEach((input) => {
+		blindsData.ante.push(input.value);
 	});
 
 	const allSmallBlindInputs = document.querySelectorAll('.small-blind-input');
@@ -100,6 +108,8 @@ const hideSettings = () => {
 		timerCounter.textContent = `${blindsData.duration[0]}:00`;
 
 		currentBlinds.textContent = `${blindsData.bigBlind[0]}/${blindsData.smallBlind[0]}`;
+
+		currentAnte.textContent = blindsData.ante[0];
 
 		nextBlinds.textContent = `${blindsData.bigBlind[1]} / ${blindsData.smallBlind[1]}`;
 
@@ -138,11 +148,6 @@ const setValues = () => {
 	secondReward.textContent = `2. ${Math.round(totalMoneyValue * 0.3)}zł`;
 };
 
-// Funkcja usuwa blindy w ustawieniach ale tylko wizualnie
-const removeBlinds = (e) => {
-	e.target.closest('div').remove();
-};
-
 // Funkcja obsługuje zarządzenie btn play/pause
 const handlePlayBtn = () => {
 	if (playIcon.classList.contains('fa-play')) {
@@ -154,37 +159,6 @@ const handlePlayBtn = () => {
 		playIcon.classList.add('fa-play');
 		timerInterval = clearInterval(timerInterval);
 	}
-};
-
-// Funkcja dodaje nowe blindy w ustawieniach
-const addNewBlinds = () => {
-	let newBlinds = document.createElement('div');
-	newBlinds.setAttribute('class', 'blinds-settings');
-	newBlinds.innerHTML = `<label>
-                    <p>Big Blind:</p>
-                    <input type="number" class="big-blind-input">
-                </label>
-                <label>
-                    <p>Ante:</p>
-                    <input type="number" class="big-blind-input">
-                </label>
-                <label>
-                    <p>Small Blind:</p>
-                    <input type="number" class="small-blind-input">
-                </label>
-                <label>
-                    <p>Duration:</p>
-                    <input type="number" class="duration-input" min="0" step="10">
-                </label>
-
-                <button class="blinds-settings__btn delete-btn"><i class="fa-solid fa-xmark"></i></button>`;
-	settingsContainer.appendChild(newBlinds);
-	settingsContainer.scrollTop = settingsContainer.scrollHeight;
-
-	const allDeleteBtns = document.querySelectorAll('.blinds-settings__btn');
-	allDeleteBtns.forEach((deleteBtn) => {
-		deleteBtn.addEventListener('click', removeBlinds);
-	});
 };
 
 // Funkcja odpowiada za dzaiałanie timera
@@ -263,6 +237,8 @@ const changeBlinds = () => {
 	} else {
 		currentBlinds.textContent = `${blindsData.bigBlind[i]}/${blindsData.smallBlind[i]}`;
 
+		currentAnte.textContent = blindsData.ante[i];
+
 		nextBlinds.textContent = `${blindsData.bigBlind[i + 1]} / ${
 			blindsData.smallBlind[i + 1]
 		}`;
@@ -297,8 +273,45 @@ const addBreak = () => {
 	allBreaksBtn.forEach((btn) => btn.addEventListener('click', deleteBreak));
 };
 
+// Funkcja usuwa przerwe
 const deleteBreak = (e) => {
 	e.target.closest('.settings-container__break').remove();
+};
+
+// Funkcja dodaje nowe blindy w ustawieniach
+const addNewBlinds = () => {
+	let newBlinds = document.createElement('div');
+	newBlinds.setAttribute('class', 'blinds-settings');
+	newBlinds.innerHTML = `<label>
+                    <p>Big Blind:</p>
+                    <input type="number" class="big-blind-input">
+                </label>
+                <label>
+                    <p>Ante:</p>
+                    <input type="number" class="ante-input">
+                </label>
+                <label>
+                    <p>Small Blind:</p>
+                    <input type="number" class="small-blind-input">
+                </label>
+                <label>
+                    <p>Duration:</p>
+                    <input type="number" class="duration-input" min="0" step="10">
+                </label>
+
+                <button class="blinds-settings__btn delete-btn"><i class="fa-solid fa-xmark"></i></button>`;
+	settingsContainer.appendChild(newBlinds);
+	settingsContainer.scrollTop = settingsContainer.scrollHeight;
+
+	const allDeleteBtns = document.querySelectorAll('.blinds-settings__btn');
+	allDeleteBtns.forEach((deleteBtn) => {
+		deleteBtn.addEventListener('click', removeBlinds);
+	});
+};
+
+// Funkcja usuwa blindy w ustawieniach ale tylko wizualnie
+const removeBlinds = (e) => {
+	e.target.closest('div').remove();
 };
 
 checkRewindBtn();
