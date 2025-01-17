@@ -78,11 +78,6 @@ const fillBlindsObject = () => {
 		}
 	};
 
-	const allBigBlindInputs = document.querySelectorAll('.big-blind-input');
-	allBigBlindInputs.forEach((input) => {
-		blindsData.bigBlind.push(validInput(input, 1));
-	});
-
 	const allAnteInputs = document.querySelectorAll('.ante-input');
 	allAnteInputs.forEach((input) => {
 		blindsData.ante.push(validInput(input, 0));
@@ -98,7 +93,19 @@ const fillBlindsObject = () => {
 		blindsData.duration.push(validInput(input, 1));
 	});
 
+	const allBigBlindInputs = document.querySelectorAll('.big-blind-input');
+	allBigBlindInputs.forEach((input, index) => {
+		if (input.value === undefined) {
+			blindsData.bigBlind.push('BREAK');
+			blindsData.smallBlind.splice(index, 0, 'BREAK');
+			blindsData.ante.splice(index, 0, 'BREAK');
+		} else {
+			blindsData.bigBlind.push(validInput(input, 1));
+		}
+	});
+
 	time = blindsData.duration[i] * 60;
+	console.log(blindsData);
 };
 
 // Funkcja sprawdza czy w tablicach już coś jest, jeśli nie to wyłącza btn do ich cofania
@@ -280,9 +287,9 @@ const changeBlinds = () => {
 // Funkcja dodaje nową przerwe
 const addBreak = () => {
 	let newBlinds = document.createElement('div');
-	newBlinds.setAttribute('class', 'settings-container__break');
-	newBlinds.innerHTML = `<div class="input-field"><label for="break-length" class="break-label">Break length:</label>
-                    <input type="number" id="break-length" class="break-input" placeholder="Minutes">
+	newBlinds.setAttribute('class', 'settings-container__break big-blind-input');
+	newBlinds.innerHTML = `<div class="input-field "><label for="break-length" class="break-label">Break length:</label>
+                    <input type="number" id="break-length" class="break-input duration-input" placeholder="Minutes">
                 </div>
                 <button class="settings-container__break-btn delete-btn">
                     <i class="fa-solid fa-xmark"></i>
