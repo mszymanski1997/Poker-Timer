@@ -583,3 +583,7 @@ dialog:not([open]) {
 .animation-hide-start {
 	animation: settings-hide 1s forwards !important;
 }
+
+.disabled {
+	display: none;
+}

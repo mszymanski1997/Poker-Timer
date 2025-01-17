@@ -8,6 +8,7 @@ const totalChips = document.querySelector('.total-chips');
 const timerCounter = document.querySelector('.timer__counter');
 const currentBlinds = document.querySelector('.current-blinds');
 const currentBlindsP = document.querySelector('.current-blinds-text');
+const currentAnteP = document.querySelector('.timer__ante');
 const currentAnte = document.querySelector('.current-ante');
 const playBtn = document.querySelector('.play-btn');
 const pauseBtn = document.querySelector('.pause-btn');
@@ -138,11 +139,8 @@ const hideSettings = () => {
 
 		timerCounter.textContent = `${blindsData.duration[0]}:00`;
 
-		currentBlinds.textContent = `${blindsData.bigBlind[0]}/${blindsData.smallBlind[0]}`;
-
-		currentAnte.textContent = blindsData.ante[0];
-
-		nextBlinds.textContent = `${blindsData.bigBlind[1]} / ${blindsData.smallBlind[1]}`;
+		setBlinds();
+		// handlePlayBtn();
 
 		currentBlinds.classList.remove('editable');
 	}
@@ -184,6 +182,7 @@ const handlePlayBtn = () => {
 	if (playIcon.classList.contains('fa-play')) {
 		playIcon.classList.remove('fa-play');
 		playIcon.classList.add('fa-pause');
+		// timerInterval = clearInterval(countTime)
 		timerInterval = setInterval(countTime, 1000);
 	} else {
 		playIcon.classList.remove('fa-pause');
@@ -266,21 +265,14 @@ const changeBlinds = () => {
 		nextBlinds.textContent = 'Add new blinds';
 		clearInterval(timerInterval);
 	} else {
-		currentBlinds.textContent = `${blindsData.bigBlind[i]}/${blindsData.smallBlind[i]}`;
+		setBlinds();
+	}
 
-		currentAnte.textContent = blindsData.ante[i];
+	time = blindsData.duration[i] * 60;
+	timerInterval = setInterval(countTime, 1000);
 
-		nextBlinds.textContent = `${blindsData.bigBlind[i + 1]} / ${
-			blindsData.smallBlind[i + 1]
-		}`;
-
-		time = blindsData.duration[i] * 60;
-		timerInterval = setInterval(countTime, 1000);
-		currentBlindsP.textContent = 'Current Blinds';
-
-		if (i == blindsData.bigBlind.length - 1) {
-			nextBlinds.textContent = 'Add new blinds';
-		}
+	if (i == blindsData.bigBlind.length - 1) {
+		nextBlinds.textContent = 'Add new blinds';
 	}
 };
 
@@ -360,6 +352,30 @@ const addNewBlinds = () => {
 // Funkcja usuwa blindy w ustawieniach ale tylko wizualnie
 const removeBlinds = (e) => {
 	e.target.closest('div').remove();
+};
+
+// Funckja ustawia wysokość blindów, teraźniejszych i przyszłych oraz ante w warstwie wizualnej
+const setBlinds = () => {
+	if (blindsData.bigBlind[i] === 'BREAK') {
+		currentBlinds.textContent = 'BREAK';
+	} else {
+		currentBlinds.textContent = `${blindsData.bigBlind[i]}/${blindsData.smallBlind[i]}`;
+	}
+
+	if (blindsData.ante[i] === 'BREAK') {
+		currentAnteP.classList.add('disabled');
+	} else {
+		currentAnteP.classList.remove('disabled');
+		currentAnte.textContent = blindsData.ante[i];
+	}
+
+	if (blindsData.bigBlind[i + 1] === 'BREAK') {
+		nextBlinds.textContent = 'BREAK';
+	} else {
+		nextBlinds.textContent = `${blindsData.bigBlind[i + 1]} / ${
+			blindsData.smallBlind[i + 1]
+		}`;
+	}
 };
 
 checkRewindBtn();
