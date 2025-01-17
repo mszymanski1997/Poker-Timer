@@ -30,6 +30,14 @@ input[type='number']::-webkit-outer-spin-button {
 	margin: 0;
 }
 
+dialog {
+	all: unset;
+}
+
+dialog:not([open]) {
+	display: none;
+}
+
 .container {
 	width: 80%;
 	height: 80%;
@@ -207,7 +215,66 @@ input[type='number']::-webkit-outer-spin-button {
 	justify-content: center;
 	align-items: center;
 	color: $main-light;
+
 	// animation: settings-move 2s forwards;
+
+	&.modal-open::after {
+		content: '';
+		width: 100%;
+		height: 100%;
+		position: absolute;
+		top: 0px;
+		left: 0;
+		background-color: rgba(0, 0, 0, 0.7);
+	}
+
+	.break-modal {
+		position: fixed;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		width: 400px;
+		height: auto;
+		background-color: rgb(235, 222, 222);
+		z-index: 2222;
+		border-radius: 12px;
+		padding: 20px 18px;
+		box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+
+		.warning-title {
+			text-align: center;
+			color: darken($main-red, 10%);
+			font-size: 20px;
+			margin: 0;
+			padding: 0;
+			line-height: 1.2;
+		}
+
+		.close-modal {
+			position: absolute;
+			top: 20px;
+			right: 18px;
+			background-color: transparent;
+			border: none;
+			font-size: 22px;
+			color: darken($main-red, 20%);
+			cursor: pointer;
+			transition: transform 0.2s ease, color 0.2s ease;
+
+			&:hover {
+				transform: scale(1.1);
+				color: darken($main-red, 30%);
+			}
+		}
+
+		p {
+			color: $main-red;
+			font-size: 16px;
+			font-weight: bold;
+			text-align: center;
+			margin: 10px 0 0;
+		}
+	}
 }
 
 .settings-container {
@@ -310,6 +377,12 @@ input[type='number']::-webkit-outer-spin-button {
 
 		&:hover {
 			scale: 0.9;
+		}
+
+		&.modal-open {
+			box-shadow: none;
+			border: none;
+			opacity: 60%;
 		}
 	}
 

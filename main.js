@@ -34,9 +34,12 @@ const addBtn = document.querySelector('.add-btn');
 const deleteBtn = document.querySelector('.delete-btn');
 const bigBlindInput = document.querySelector('.big-blind-input');
 const smallBlindInput = document.querySelector('.small-blind-input');
-// Btns adding blinds and breaks
+//Break
 const addBlindBtn = document.querySelector('.settings-container__add-blind');
 const addBreakBtn = document.querySelector('.settings-container__add-break ');
+const breakModal = document.querySelector('.break-modal');
+const closeModalBtn = document.querySelector('.close-modal');
+const warningMessage = document.querySelector('.warning');
 
 const blindsData = {
 	bigBlind: [],
@@ -110,9 +113,15 @@ const hideSettings = () => {
 	if (currentBlinds.classList.contains('editable')) {
 		fillBlindsObject();
 
+		if (blindsData.bigBlind.length === 0) {
+			showBreakModal();
+			warningMessage.textContent = 'You need to add at least one blind';
+			return;
+		}
+
 		if (!isValid) {
-			console.log('Fill the inputs');
-			isValid = true;
+			showBreakModal();
+			warningMessage.textContent = 'Every input field must be filled';
 			return;
 		}
 
@@ -293,6 +302,23 @@ const deleteBreak = (e) => {
 	e.target.closest('.settings-container__break').remove();
 };
 
+// Funckja otwiera modal
+const showBreakModal = () => {
+	breakModal.showModal();
+	settings.classList.add('modal-open');
+	addBlindBtn.classList.add('modal-open');
+	addBreakBtn.classList.add('modal-open');
+	isValid = true;
+};
+
+// Funkcja zamyka modal
+const closeModal = () => {
+	breakModal.close();
+	settings.classList.remove('modal-open');
+	addBlindBtn.classList.remove('modal-open');
+	addBreakBtn.classList.remove('modal-open');
+};
+
 // Funkcja dodaje nowe blindy w ustawieniach
 const addNewBlinds = () => {
 	let newBlinds = document.createElement('div');
@@ -337,3 +363,4 @@ forwardBtn.addEventListener('click', handleForwardBtn);
 rewindBtn.addEventListener('click', handleRewidnBtn);
 addBlindBtn.addEventListener('click', addNewBlinds);
 addBreakBtn.addEventListener('click', addBreak);
+closeModalBtn.addEventListener('click', closeModal);
