@@ -56,6 +56,7 @@ let i = 0;
 let time = 25 * 60;
 let timerInterval;
 let isValid = true;
+let id = 0;
 
 // Funkcja pokazuje ustawienia
 const showSettings = () => {
@@ -105,7 +106,12 @@ const fillBlindsObject = () => {
 		}
 	});
 
-	time = blindsData.duration[i] * 60;
+	// const allSettingsDivs = document.querySelectorAll('.settings-div');
+	// allSettingsDivs.forEach((settingDiv) => {
+	// 	settingDiv.id = id;
+	// 	id++;
+	// });
+
 	console.log(blindsData);
 };
 
@@ -118,36 +124,37 @@ const checkRewindBtn = () => {
 
 // Funkcja chowa ustawienia, sprawdza czy można je dalej edytować, jeśli tak to pokazuje je na strone. Daje też zabezpieczenie że jeżeli następny blind nie jest określony to dodaje ostrzeżenie
 const hideSettings = () => {
-	if (currentBlinds.classList.contains('editable')) {
-		fillBlindsObject();
+	fillBlindsObject();
 
-		if (blindsData.bigBlind.length === 0) {
-			showBreakModal();
-			warningMessage.textContent = 'You need to add at least one blind';
-			return;
-		}
-
-		if (!isValid) {
-			showBreakModal();
-			warningMessage.textContent = 'Every input field must be filled';
-			return;
-		}
-
-		settings.classList.remove('animation-start');
-		setValues();
-		settings.classList.add('animation-hide-start');
-
-		timerCounter.textContent = `${blindsData.duration[0]}:00`;
-
-		setBlinds();
-		// handlePlayBtn();
-
-		currentBlinds.classList.remove('editable');
+	if (blindsData.bigBlind.length === 0) {
+		showBreakModal();
+		warningMessage.textContent = 'You need to add at least one blind';
+		return;
 	}
+
+	if (!isValid) {
+		showBreakModal();
+		warningMessage.textContent = 'Every input field must be filled';
+		return;
+	}
+
+	settings.classList.remove('animation-start');
+	setValues();
+	settings.classList.add('animation-hide-start');
+
+	setBlinds();
 
 	if (i == blindsData.bigBlind.length - 1) {
 		nextBlinds.textContent = 'Add new blinds';
 	}
+
+	if (currentBlinds.classList.contains('editable')) {
+		time = blindsData.duration[i] * 60;
+		currentBlinds.classList.remove('editable');
+		timerCounter.textContent = `${blindsData.duration[0]}:00`;
+	}
+
+	saveToLocalStorage();
 };
 
 // Funkcja umieszcza wartości po bokach timera
@@ -279,7 +286,10 @@ const changeBlinds = () => {
 // Funkcja dodaje nową przerwe
 const addBreak = () => {
 	let newBlinds = document.createElement('div');
-	newBlinds.setAttribute('class', 'settings-container__break big-blind-input');
+	newBlinds.setAttribute(
+		'class',
+		'settings-container__break big-blind-input settings-div'
+	);
 	newBlinds.innerHTML = `<div class="input-field "><label for="break-length" class="break-label">Break length:</label>
                     <input type="number" id="break-length" class="break-input duration-input" placeholder="Minutes">
                 </div>
@@ -298,7 +308,7 @@ const addBreak = () => {
 
 // Funkcja usuwa przerwe
 const deleteBreak = (e) => {
-	e.target.closest('.settings-container__break').remove();
+	e.target.closest('.settings-div').remove();
 };
 
 // Funckja otwiera modal
@@ -321,7 +331,7 @@ const closeModal = () => {
 // Funkcja dodaje nowe blindy w ustawieniach
 const addNewBlinds = () => {
 	let newBlinds = document.createElement('div');
-	newBlinds.setAttribute('class', 'blinds-settings');
+	newBlinds.setAttribute('class', 'blinds-settings settings-div');
 	newBlinds.innerHTML = `<label>
                     <p>Big Blind:</p>
                     <input type="number" class="big-blind-input" >
@@ -351,7 +361,7 @@ const addNewBlinds = () => {
 
 // Funkcja usuwa blindy w ustawieniach ale tylko wizualnie
 const removeBlinds = (e) => {
-	e.target.closest('div').remove();
+	e.target.closest('.settings-div').remove();
 };
 
 // Funckja ustawia wysokość blindów, teraźniejszych i przyszłych oraz ante w warstwie wizualnej
@@ -378,6 +388,90 @@ const setBlinds = () => {
 	}
 };
 
+// Funkcja do zapisania  divów w localStorage
+const saveToLocalStorage = () => {
+	const settingsData = [];
+	const allSettings = document.querySelectorAll('.settings-div');
+
+	allSettings.forEach((setting) => {
+		if (setting.classList.contains('blinds-settings')) {
+			const bigBlind = setting.querySelector('.big-blind-input').value || '';
+			const ante = setting.querySelector('.ante-input').value || '';
+			const smallBlind =
+				setting.querySelector('.small-blind-input').value || '';
+			const duration = setting.querySelector('.duration-input').value || '';
+			settingsData.push({
+				type: 'blind',
+				bigBlind,
+				ante,
+				smallBlind,
+				duration,
+			});
+		} else if (setting.classList.contains('settings-container__break')) {
+			const breakLength = setting.querySelector('.break-input').value || '';
+			settingsData.push({ type: 'break', breakLength });
+		}
+	});
+
+	localStorage.setItem('settingsData', JSON.stringify(settingsData));
+};
+
+// Funkcja do odtworzenia divów z localStorage
+const loadFromLocalStorage = () => {
+	const settingsData = JSON.parse(localStorage.getItem('settingsData')) || [];
+
+	settingsData.forEach(
+		({ type, bigBlind, ante, smallBlind, duration, breakLength }) => {
+			if (type === 'blind') {
+				let newBlinds = document.createElement('div');
+				newBlinds.setAttribute('class', 'blinds-settings settings-div');
+				newBlinds.innerHTML = `
+		  <label>
+			<p>Big Blind:</p>
+			<input type="number" class="big-blind-input" value="${bigBlind}">
+		  </label>
+		  <label>
+			<p>Ante:</p>
+			<input type="number" class="ante-input" value="${ante}">
+		  </label>
+		  <label>
+			<p>Small Blind:</p>
+			<input type="number" class="small-blind-input" value="${smallBlind}">
+		  </label>
+		  <label>
+			<p>Duration:</p>
+			<input type="number" class="duration-input" step="10" value="${duration}">
+		  </label>
+		  <button class="blinds-settings__btn delete-btn"><i class="fa-solid fa-xmark"></i></button>`;
+				settingsContainer.appendChild(newBlinds);
+
+				const deleteBtn = newBlinds.querySelector('.blinds-settings__btn');
+				deleteBtn.addEventListener('click', removeBlinds);
+			} else if (type === 'break') {
+				let newBreak = document.createElement('div');
+				newBreak.setAttribute(
+					'class',
+					'settings-container__break settings-div big-blind-input'
+				);
+				newBreak.innerHTML = `
+		  <div class="input-field">
+			<label for="break-length" class="break-label">Break length:</label>
+			<input type="number" id="break-length" class="break-input duration-input" value="${breakLength}" placeholder="Minutes">
+		  </div>
+		  <button class="settings-container__break-btn delete-btn">
+			<i class="fa-solid fa-xmark"></i>
+		  </button>`;
+				settingsContainer.appendChild(newBreak);
+
+				const deleteBreakBtn = newBreak.querySelector(
+					'.settings-container__break-btn'
+				);
+				deleteBreakBtn.addEventListener('click', deleteBreak);
+			}
+		}
+	);
+};
+
 checkRewindBtn();
 settingsBtn.addEventListener('click', showSettings);
 confirmBtn.addEventListener('click', hideSettings);
@@ -387,3 +481,4 @@ rewindBtn.addEventListener('click', handleRewidnBtn);
 addBlindBtn.addEventListener('click', addNewBlinds);
 addBreakBtn.addEventListener('click', addBreak);
 closeModalBtn.addEventListener('click', closeModal);
+window.addEventListener('DOMContentLoaded', loadFromLocalStorage);
