@@ -1,5 +1,6 @@
 @import 'variables';
 @import 'medium';
+@import 'small';
 
 * {
 	margin: 0;
@@ -222,14 +223,12 @@ dialog:not([open]) {
 	align-items: center;
 	color: $main-light;
 
-	// animation: settings-move 2s forwards;
-
 	&.modal-open::after {
 		content: '';
 		width: 100%;
 		height: 100%;
 		position: absolute;
-		top: 0px;
+		top: 0;
 		left: 0;
 		background-color: rgba(0, 0, 0, 0.7);
 	}
