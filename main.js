@@ -62,6 +62,7 @@ let id = 0;
 const showSettings = () => {
 	settings.classList.remove('animation-hide-start');
 	settings.classList.add('animation-start');
+	settings.classList.toggle('disabled');
 };
 
 // Funkcja uzupełnia tablice z blindami i ich długością, nadpisuje zmienną time
@@ -141,6 +142,7 @@ const hideSettings = () => {
 	settings.classList.remove('animation-start');
 	setValues();
 	settings.classList.add('animation-hide-start');
+	// settings.classList.toggle('disabled');
 
 	setBlinds();
 
@@ -155,6 +157,9 @@ const hideSettings = () => {
 	}
 
 	saveToLocalStorage();
+	setTimeout(() => {
+		settings.classList.toggle('disabled');
+	}, 400);
 };
 
 // Funkcja umieszcza wartości po bokach timera

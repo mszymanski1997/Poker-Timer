@@ -12,6 +12,7 @@
 body {
 	background-image: url('https://cdn.pixabay.com/photo/2016/03/17/23/09/poker-1264076_1280.jpg');
 	background-size: cover;
+	background-position: center;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -591,11 +592,9 @@ dialog:not([open]) {
 }
 
 .animation-hide-start {
-	animation: settings-hide 1s forwards !important;
+	animation: settings-hide 0.5s forwards !important;
 }
 
 .disabled {
 	display: none;
 }
-
-
