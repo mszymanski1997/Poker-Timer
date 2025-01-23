@@ -16,6 +16,7 @@ const settingsBtn = document.querySelector('.settings-btn');
 const rewindBtn = document.querySelector('.rewind-btn');
 const forwardBtn = document.querySelector('.forward-btn');
 const playIcon = document.querySelector('#play-icon');
+// const container = document.querySelector('.container');
 // Main page - right list
 const playersIn = document.querySelector('.players-in');
 const totalMoney = document.querySelector('.total-money');
@@ -142,7 +143,6 @@ const hideSettings = () => {
 	settings.classList.remove('animation-start');
 	setValues();
 	settings.classList.add('animation-hide-start');
-	// settings.classList.toggle('disabled');
 
 	setBlinds();
 
