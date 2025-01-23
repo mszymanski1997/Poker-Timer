@@ -1,11 +1,14 @@
 @media (min-width: 910px) and (max-width: 1450px) {
-  .container .info-panel__title {
+  .container .info-panel__title,
+  .container .info-cash-panel__title {
     font-size: 30px;
   }
-  .container .info-panel__list li {
+  .container .info-panel__list li,
+  .container .info-cash-panel__list li {
     font-size: 17px;
   }
-  .container .info-panel__list li span {
+  .container .info-panel__list li span,
+  .container .info-cash-panel__list li span {
     font-size: 20px;
   }
   .container .timer__title {
@@ -39,22 +42,6 @@
   }
   .container .timer__ante {
     font-size: 22px;
-  }
-  .container .info-cash-panel__title {
-    font-size: 30px;
-  }
-  .container .info-cash-panel__list li {
-    list-style: none;
-    text-align: center;
-    font-size: 20px;
-    font-size: 17px;
-  }
-  .container .info-cash-panel__list li span {
-    display: block;
-    text-align: center;
-    margin-top: 5px;
-    font-size: 25px;
-    font-size: 20px;
   }
   .settings .settings-container {
     width: 100%;
@@ -111,63 +98,70 @@
   }
 }
 @media (min-width: 550px) and (max-width: 909px) {
-  .container .info-panel__title {
-    font-size: 30px;
-    color: red;
+  body .container {
+    flex-wrap: wrap;
+    align-items: stretch;
+    border: none;
+    box-shadow: none;
+    height: 100%;
+    width: 100%;
+    border-radius: 0;
   }
-  .container .info-panel__list li {
-    font-size: 17px;
+  body .container .timer {
+    width: 100%;
+    order: -1;
+    height: auto;
+    border-bottom: 3px solid #b22222;
   }
-  .container .info-panel__list li span {
-    font-size: 20px;
+  body .container .timer__title {
+    display: none;
   }
-  .container .timer__title {
-    font-size: 22px;
+  body .container .timer__counter {
+    font-size: 120px;
   }
-  .container .timer__counter {
-    font-size: 90px;
+  body .container .timer__current-blinds .current-blinds-text {
+    font-size: 23px;
   }
-  .container .timer__current-blinds {
-    color: #e0e0e0;
-    font-size: 20px;
+  body .container .timer__current-blinds span {
+    font-size: 110px;
   }
-  .container .timer__current-blinds span {
-    font-size: 90px;
-  }
-  .container .timer__current-blinds span:first-child {
-    font-size: 20px;
-  }
-  .container .timer__buttons button {
+  body .container .timer__buttons button {
     padding: 10px 18px;
     margin: 0 8px;
   }
-  .container .timer__buttons button i {
+  body .container .timer__buttons button i {
     font-size: 22px;
   }
-  .container .timer__buttons button .fa-pause {
+  body .container .timer__buttons button .fa-pause {
     font-size: 22px;
   }
-  .container .timer__buttons button:first-child {
+  body .container .timer__buttons button:first-child {
     margin: 0;
   }
-  .container .timer__ante {
+  body .container .timer__ante {
     font-size: 22px;
+    bottom: 45px;
   }
-  .container .info-cash-panel__title {
+  body .container .info-panel,
+  body .container .info-cash-panel {
+    width: 50%;
+    height: auto;
+    border: none;
+  }
+  body .container .info-panel__title,
+  body .container .info-cash-panel__title {
     font-size: 30px;
   }
-  .container .info-cash-panel__list li {
-    list-style: none;
-    text-align: center;
-    font-size: 20px;
-    font-size: 17px;
+  body .container .info-panel__list li,
+  body .container .info-cash-panel__list li {
+    font-size: 15px;
   }
-  .container .info-cash-panel__list li span {
-    display: block;
-    text-align: center;
-    margin-top: 5px;
-    font-size: 25px;
-    font-size: 20px;
+  body .container .info-panel__list li span,
+  body .container .info-cash-panel__list li span {
+    font-size: 18px;
+  }
+  body .container .info-panel {
+    border-right: 3px solid #b22222;
   }
   .settings .settings-container {
     width: 100%;
@@ -177,6 +171,7 @@
     border: none;
     border-radius: 0;
     display: flex;
+    box-shadow: none;
   }
   .settings .settings-container__medium {
     display: flex;
@@ -810,5 +805,9 @@ dialog:not([open]) {
 }
 
 .disabled {
+  display: none;
+}
+
+.container-mobile {
   display: none;
 }/*# sourceMappingURL=style.css.map */

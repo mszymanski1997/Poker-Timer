@@ -1,6 +1,7 @@
 @media (min-width: 910px) and (max-width: 1450px) {
 	.container {
-		.info-panel {
+		.info-panel,
+		.info-cash-panel {
 			&__title {
 				font-size: 30px;
 			}
@@ -59,24 +60,6 @@
 
 			&__ante {
 				font-size: 22px;
-			}
-		}
-
-		.info-cash-panel {
-			&__title {
-				font-size: 30px;
-			}
-
-			&__list {
-				li {
-					@include li-style;
-					font-size: 17px;
-
-					span {
-						@include span-style;
-						font-size: 20px;
-					}
-				}
 			}
 		}
 	}
