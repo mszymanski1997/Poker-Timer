@@ -1,6 +1,7 @@
 @import 'variables';
 @import 'medium';
 @import 'small';
+@import 'very-small';
 
 * {
 	margin: 0;
@@ -597,6 +598,4 @@ dialog:not([open]) {
 	display: none;
 }
 
-.container-mobile {
-	display: none;
-}
+
