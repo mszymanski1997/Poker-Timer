@@ -346,7 +346,7 @@
     height: 50px;
     z-index: 2;
     margin-top: 10px;
-    bottom: 3%;
+    bottom: 2%;
   }
   body .settings .settings-container .confirm-btn i {
     font-size: 30px;
@@ -354,19 +354,17 @@
   body .settings .settings-container::after {
     content: "";
     position: fixed;
-    bottom: -70px;
+    bottom: -40px;
     left: 50%;
     width: 95%;
-    height: 130px;
+    height: 80px;
     background-color: #2a2929;
   }
   body .settings .settings-container__add-blind {
     left: 30%;
-    bottom: 3%;
   }
   body .settings .settings-container__add-break {
     left: 60%;
-    bottom: 3%;
   }
   body .settings .settings-container__btn {
     display: flex;
@@ -375,6 +373,7 @@
     width: 50px;
     height: 50px;
     font-size: 10px;
+    bottom: 2%;
   }
   body .settings .settings-container .blinds-settings p {
     font-size: 14px;
