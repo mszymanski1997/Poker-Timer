@@ -127,9 +127,9 @@ dialog:not([open]) {
 	&__buttons {
 		width: 60%;
 		display: flex;
-		justify-content: space-evenly;
+		justify-content: center;
+		gap: 30px;
 		align-items: center;
-		margin-right: 10px;
 
 		button {
 			padding: 20px 35px;

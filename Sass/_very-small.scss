@@ -35,6 +35,7 @@
 				}
 
 				&__buttons {
+					gap: 10px;
 					button {
 						padding: 10px 18px;
 						margin: 0 8px;
@@ -202,6 +203,11 @@
 						font-size: 70px;
 					}
 				}
+
+				&__buttons {
+					gap: 5px;
+				}
+
 				&__ante {
 					bottom: -5px;
 					font-size: 16px;

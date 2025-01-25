@@ -27,6 +27,9 @@
   .container .timer__current-blinds span:first-child {
     font-size: 20px;
   }
+  .container .timer__buttons {
+    gap: 20px;
+  }
   .container .timer__buttons button {
     padding: 10px 18px;
     margin: 0 8px;
@@ -126,9 +129,11 @@
   body .container .timer__current-blinds span {
     font-size: 110px;
   }
+  body .container .timer__buttons {
+    gap: 20px;
+  }
   body .container .timer__buttons button {
     padding: 10px 18px;
-    margin: 0 8px;
   }
   body .container .timer__buttons button i {
     font-size: 22px;
@@ -271,6 +276,9 @@
   body .container .timer__current-blinds span {
     font-size: 90px;
   }
+  body .container .timer__buttons {
+    gap: 10px;
+  }
   body .container .timer__buttons button {
     padding: 10px 18px;
     margin: 0 8px;
@@ -402,6 +410,9 @@
   body .container .timer__current-blinds span {
     font-size: 70px;
   }
+  body .container .timer__buttons {
+    gap: 5px;
+  }
   body .container .timer__ante {
     bottom: -5px;
     font-size: 16px;
@@ -529,9 +540,9 @@ dialog:not([open]) {
 .timer__buttons {
   width: 60%;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
+  gap: 30px;
   align-items: center;
-  margin-right: 10px;
 }
 .timer__buttons button {
   padding: 20px 35px;
