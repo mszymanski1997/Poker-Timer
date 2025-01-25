@@ -55,7 +55,7 @@
 
 				&__ante {
 					font-size: 20px;
-					bottom: 50px;
+					bottom: 40px;
 				}
 			}
 
@@ -181,6 +181,30 @@
 
 				input {
 					font-size: 13px;
+				}
+			}
+		}
+	}
+}
+
+@media (max-width: 400px) {
+	body {
+		.container {
+			.timer {
+				&__counter {
+					font-size: 80px;
+				}
+				&__current-blinds {
+					.current-blinds-text {
+						font-size: 16px;
+					}
+					span {
+						font-size: 70px;
+					}
+				}
+				&__ante {
+					bottom: -5px;
+					font-size: 16px;
 				}
 			}
 		}
