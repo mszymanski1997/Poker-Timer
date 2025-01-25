@@ -287,7 +287,6 @@ dialog:not([open]) {
 .settings-container {
 	overflow-y: auto;
 	margin-top: 20px;
-	// min-height: 95%;
 	height: 95%;
 	width: 45%;
 	@include container-style;

@@ -98,7 +98,7 @@
 		.settings-container {
 			width: 100%;
 			height: 100%;
-			// min-height: 100%;
+			padding: 10px 20px;
 			border: none;
 			box-shadow: none;
 			border-radius: 0;
@@ -176,12 +176,60 @@
 			}
 
 			.blinds-settings {
-				p {
-					font-size: 14px;
+				display: flex;
+				justify-content: space-evenly;
+				align-items: center;
+				margin-top: 20px;
+				width: 100%;
+
+				&:last-child {
+					margin-bottom: 30px;
 				}
 
-				input {
-					font-size: 13px;
+				label {
+					p {
+						margin-bottom: 5px;
+						font-size: 11px;
+						margin-left: 5px;
+					}
+
+					input {
+						@include input-style;
+						width: 80%;
+
+						&:focus {
+							@include focus-style;
+						}
+					}
+				}
+
+				&__btn {
+					position: relative;
+					@include container-style;
+					border-radius: 12px;
+					height: 60%;
+					padding: 6px 24px;
+					// margin: 0 8px;
+					align-self: flex-end;
+					background-color: $main-dark;
+					cursor: pointer;
+					transition: scale 0.3s;
+					color: $main-light;
+					font-size: 17px;
+					font-weight: bold;
+
+					&:hover {
+						scale: 0.9;
+					}
+
+					i {
+						color: $main-light;
+						font-size: 20px;
+						position: absolute;
+						top: 50%;
+						left: 50%;
+						transform: translate(-50%, -50%);
+					}
 				}
 			}
 		}
