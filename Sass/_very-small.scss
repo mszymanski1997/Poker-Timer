@@ -261,5 +261,22 @@
 				}
 			}
 		}
+
+		.settings {
+			.settings-container {
+				.blinds-settings {
+					label {
+						input {
+							@include input-style;
+							width: 90%;
+
+							&:focus {
+								@include focus-style;
+							}
+						}
+					}
+				}
+			}
+		}
 	}
 }
