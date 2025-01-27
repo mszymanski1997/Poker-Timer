@@ -58,6 +58,7 @@ let time = 25 * 60;
 let timerInterval;
 let isValid = true;
 let id = 0;
+const screenWidth = window.innerWidth;
 
 // Funkcja pokazuje ustawienia
 const showSettings = () => {
@@ -356,12 +357,34 @@ const addNewBlinds = () => {
 	settingsContainer.appendChild(newBlinds);
 	settingsContainer.scrollTop = settingsContainer.scrollHeight;
 
+	const allInputs = document.querySelectorAll('.blind-input');
+	allInputs.forEach((input) => {
+		input.addEventListener('input', (e) => updateInputsFontSize(e.target));
+	});
+
 	const allDeleteBtns = document.querySelectorAll('.blinds-settings__btn');
 	allDeleteBtns.forEach((deleteBtn) => {
 		deleteBtn.addEventListener('click', removeBlinds);
 	});
 };
 
+const updateInputsFontSize = (input) => {
+	const inputNumber = parseInt(input.value);
+
+	if (screenWidth <= 549) {
+		if (inputNumber >= 10000) {
+			input.style.fontSize = '12px';
+			if (inputNumber >= 100000) {
+				input.style.fontSize = '10px';
+				if (inputNumber >= 1000000) {
+					input.style.fontSize = '8px';
+				}
+			}
+		} else {
+			input.style.fontSize = '15px';
+		}
+	}
+};
 // Funkcja usuwa blindy w ustawieniach ale tylko wizualnie
 const removeBlinds = (e) => {
 	e.target.closest('.settings-div').remove();
@@ -479,7 +502,6 @@ const loadFromLocalStorage = () => {
 
 // Funkcja zmniejsza czcionkę jak big blind jest tak dużą cyfrą żeby wychodziło poza przewidziany obszar
 const updateFonteSize = () => {
-	const screenWidth = window.innerWidth;
 	let fontSize;
 
 	if (screenWidth > 1450 && parseInt(blindsData.bigBlind[i]) >= 100000) {

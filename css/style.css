@@ -473,7 +473,7 @@
     width: 80%;
     padding: 10px 0;
     text-align: center;
-    font-size: 8px;
+    font-size: 15px;
   }
   body .settings-container .blinds-settings__btn {
     position: relative;
@@ -520,9 +520,6 @@
   }
   body .settings .settings-container .blinds-settings label input {
     width: 90%;
-  }
-  body .settings .settings-container .blinds-settings label input:focus {
-    font-size: 10px;
   }
 }
 * {
