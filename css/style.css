@@ -916,9 +916,9 @@ dialog:not([open]) {
 .settings-container::after {
   content: "";
   position: fixed;
-  bottom: -36px;
+  bottom: -35px;
   left: 50%;
-  width: 41%;
+  width: 48%;
   height: 100px;
   background-color: #2a2929;
   transform: translate(-50%, -50%);

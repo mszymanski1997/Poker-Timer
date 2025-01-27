@@ -407,9 +407,9 @@ dialog:not([open]) {
 	&::after {
 		content: '';
 		position: fixed;
-		bottom: -36px;
+		bottom: -35px;
 		left: 50%;
-		width: 41%;
+		width: 48%;
 		height: 100px;
 		background-color: lighten($main-dark, 5%);
 		transform: translate(-50%, -50%);

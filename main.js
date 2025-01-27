@@ -65,6 +65,10 @@ const showSettings = () => {
 	settings.classList.remove('animation-hide-start');
 	settings.classList.add('animation-start');
 	settings.classList.toggle('disabled');
+	const allInputs = document.querySelectorAll('.blind-input');
+	allInputs.forEach((input) => {
+		input.addEventListener('input', (e) => updateInputsFontSize(e.target));
+	});
 };
 
 // Funkcja uzupełnia tablice z blindami i ich długością, nadpisuje zmienną time
@@ -456,19 +460,19 @@ const loadFromLocalStorage = () => {
 				newBlinds.innerHTML = `
 		  <label>
 			<p>Big Blind:</p>
-			<input type="number" class="big-blind-input" value="${bigBlind}">
+			<input type="number" class="big-blind-input blind-input" value="${bigBlind}">
 		  </label>
 		  <label>
 			<p>Ante:</p>
-			<input type="number" class="ante-input" value="${ante}">
+			<input type="number" class="ante-input blind-input" value="${ante}">
 		  </label>
 		  <label>
 			<p>Small Blind:</p>
-			<input type="number" class="small-blind-input" value="${smallBlind}">
+			<input type="number" class="small-blind-input blind-input" value="${smallBlind}">
 		  </label>
 		  <label>
 			<p>Duration:</p>
-			<input type="number" class="duration-input" step="10" value="${duration}">
+			<input type="number" class="duration-input blind-input" step="10" value="${duration}">
 		  </label>
 		  <button class="blinds-settings__btn delete-btn"><i class="fa-solid fa-xmark"></i></button>`;
 				settingsContainer.appendChild(newBlinds);
