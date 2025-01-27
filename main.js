@@ -152,6 +152,8 @@ const hideSettings = () => {
 	}
 
 	saveToLocalStorage();
+	forwardBtn.disabled = false;
+
 	setTimeout(() => {
 		settings.classList.toggle('disabled');
 	}, 400);
@@ -276,6 +278,7 @@ const changeBlinds = () => {
 	}
 
 	time = blindsData.duration[i] * 60;
+	countTime();
 	timerInterval = setInterval(countTime, 1000);
 
 	if (i == blindsData.bigBlind.length - 1) {
