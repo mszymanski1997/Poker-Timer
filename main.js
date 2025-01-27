@@ -504,9 +504,9 @@ const updateFonteSize = () => {
 		}
 	} else if (screenWidth < 505 && parseInt(blindsData.bigBlind[i]) >= 1000) {
 		fontSize = 65;
-		if (parseInt(blindsData.bigBlind[i]) >= 100000) {
+		if (parseInt(blindsData.bigBlind[i]) >= 10000) {
 			fontSize = 45;
-			if (parseInt(blindsData.bigBlind[i]) >= 10000000) {
+			if (parseInt(blindsData.bigBlind[i]) >= 1000000) {
 				fontSize = 35;
 			}
 		}
