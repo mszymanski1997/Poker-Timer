@@ -166,6 +166,66 @@
 					font-size: 13px;
 				}
 			}
+
+			.blinds-settings {
+				display: flex;
+				justify-content: space-evenly;
+				margin-top: 20px;
+				width: 100%;
+
+				&:last-child {
+					margin-bottom: 30px;
+				}
+
+				label {
+					p {
+						margin-bottom: 5px;
+						font-size: 15px;
+						margin-left: 5px;
+					}
+
+					input {
+						@include input-style;
+						width: 65%;
+						font-size: 13px;
+						padding: 10px 5px;
+						text-align: center;
+
+						&:focus {
+							@include focus-style;
+						}
+					}
+				}
+
+				&__btn {
+					position: relative;
+					@include container-style;
+					border-radius: 12px;
+					height: 60%;
+					padding: 8px 32px;
+					margin: 0 8px;
+					align-self: flex-end;
+					background-color: $main-dark;
+					cursor: pointer;
+					transition: scale 0.3s;
+					color: $main-light;
+					font-size: 17px;
+					font-weight: bold;
+
+					&:hover {
+						scale: 0.9;
+					}
+
+					i {
+						color: $main-light;
+						font-size: 25px;
+						position: absolute;
+						top: 50%;
+						left: 50%;
+						transform: translate(-50%, -50%);
+					}
+				}
+			}
 		}
 
 		.settings {

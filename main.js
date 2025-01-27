@@ -337,19 +337,19 @@ const addNewBlinds = () => {
 	newBlinds.setAttribute('class', 'blinds-settings settings-div');
 	newBlinds.innerHTML = `<label>
                     <p>Big Blind:</p>
-                    <input type="number" class="big-blind-input" >
+                    <input type="number" class="big-blind-input blind-input" >
                 </label>
                 <label>
                     <p>Ante:</p>
-                    <input type="number" class="ante-input" >
+                    <input type="number" class="ante-input blind-input" >
                 </label>
                 <label>
                     <p>Small Blind:</p>
-                    <input type="number" class="small-blind-input" m>
+                    <input type="number" class="small-blind-input blind-input" >
                 </label>
                 <label>
                     <p>Duration:</p>
-                    <input type="number" class="duration-input"  step="10">
+                    <input type="number" class="duration-input blind-input"  >
                 </label>
 
                 <button class="blinds-settings__btn delete-btn"><i class="fa-solid fa-xmark"></i></button>`;

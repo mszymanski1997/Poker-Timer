@@ -195,12 +195,10 @@
 					}
 
 					input {
-						@include input-style;
 						width: 80%;
-
-						&:focus {
-							@include focus-style;
-						}
+						padding: 10px 0;
+						text-align: center;
+						font-size: 8px;
 					}
 				}
 

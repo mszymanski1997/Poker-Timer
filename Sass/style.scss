@@ -288,7 +288,7 @@ dialog:not([open]) {
 	overflow-y: auto;
 	margin-top: 20px;
 	height: 95%;
-	width: 45%;
+	width: 50%;
 	@include container-style;
 	border-radius: 12px;
 	background-color: lighten($main-dark, 5%);
