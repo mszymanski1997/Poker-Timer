@@ -507,7 +507,7 @@ const updateFonteSize = () => {
 		if (parseInt(blindsData.bigBlind[i]) >= 10000) {
 			fontSize = 40;
 			if (parseInt(blindsData.bigBlind[i]) >= 1000000) {
-				fontSize = 30;
+				fontSize = 25;
 			}
 		}
 	}
