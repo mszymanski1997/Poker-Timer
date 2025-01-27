@@ -108,13 +108,8 @@ const fillBlindsObject = () => {
 		}
 	});
 
-	// const allSettingsDivs = document.querySelectorAll('.settings-div');
-	// allSettingsDivs.forEach((settingDiv) => {
-	// 	settingDiv.id = id;
-	// 	id++;
-	// });
-
 	console.log(blindsData);
+	console.log(i);
 };
 
 // Funkcja sprawdza czy w tablicach już coś jest, jeśli nie to wyłącza btn do ich cofania
@@ -391,6 +386,8 @@ const setBlinds = () => {
 			blindsData.smallBlind[i + 1]
 		}`;
 	}
+
+	updateFonteSize();
 };
 
 // Funkcja do zapisania  divów w localStorage
@@ -475,6 +472,47 @@ const loadFromLocalStorage = () => {
 			}
 		}
 	);
+};
+
+// Funkcja zmniejsza czcionkę jak big blind jest tak dużą cyfrą żeby wychodziło poza przewidziany obszar
+const updateFonteSize = () => {
+	const screenWidth = window.innerWidth;
+	let fontSize;
+
+	if (screenWidth > 1450 && parseInt(blindsData.bigBlind[i]) >= 100000) {
+		fontSize = 80;
+	} else if (
+		screenWidth <= 1450 &&
+		screenWidth >= 910 &&
+		parseInt(blindsData.bigBlind[i]) >= 10000
+	) {
+		fontSize = 60;
+		if (parseInt(blindsData.bigBlind[i]) >= 100000) {
+			fontSize = 50;
+			if (parseInt(blindsData.bigBlind[i]) >= 1000000) {
+				fontSize = 40;
+			}
+		}
+	} else if (
+		screenWidth >= 505 &&
+		screenWidth <= 909 &&
+		parseInt(blindsData.bigBlind[i]) >= 10000
+	) {
+		fontSize = 70;
+		if (parseInt(blindsData.bigBlind[i]) >= 1000000) {
+			fontSize = 50;
+		}
+	} else if (screenWidth < 505 && parseInt(blindsData.bigBlind[i]) >= 1000) {
+		fontSize = 65;
+		if (parseInt(blindsData.bigBlind[i]) >= 100000) {
+			fontSize = 45;
+			if (parseInt(blindsData.bigBlind[i]) >= 10000000) {
+				fontSize = 35;
+			}
+		}
+	}
+
+	currentBlinds.style.fontSize = `${fontSize}px`;
 };
 
 checkRewindBtn();
