@@ -56,7 +56,7 @@ const audioChangeBlind = document.querySelector('.ding-audio');
 let i = 0;
 let time = 25 * 60;
 let timerInterval;
-let inputValidation;
+let validationErrors = [];
 let id = 0;
 const screenWidth = window.innerWidth;
 
@@ -77,16 +77,16 @@ const fillBlindsObject = () => {
 	blindsData.ante = [];
 	blindsData.smallBlind = [];
 	blindsData.duration = [];
+	validationErrors = [];
 
 	const validInput = (input, min) => {
 		if (!input.value) {
-			inputValidation = 'isEmpty';
+			validationErrors.push('isEmpty');
 			return min;
 		} else if (input.value < min) {
-			inputValidation = 'lowerThanMin';
+			validationErrors.push('lowerThanMin');
 			return min;
 		} else {
-			inputValidation = 'isOk';
 			return input.value;
 		}
 	};
@@ -138,14 +138,13 @@ const hideSettings = () => {
 		return;
 	}
 
-	if (inputValidation === 'isEmpty') {
+	if (validationErrors.includes('isEmpty')) {
 		showBreakModal();
-		warningMessage.textContent =
-			'Every input field must be filled';
+		warningMessage.textContent = 'Every input field must be filled';
 		return;
 	}
 
-	if (inputValidation === 'lowerThanMin') {
+	if (validationErrors.includes('lowerThanMin')) {
 		showBreakModal();
 		warningMessage.textContent =
 			'All inputs values except ante must be higher than 0';
