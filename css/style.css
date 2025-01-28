@@ -628,6 +628,7 @@ dialog:not([open]) {
   font-size: 120px;
   color: #e0e0e0;
   font-weight: bold;
+  text-align: center;
 }
 .timer__current-blinds {
   color: #e0e0e0;
@@ -795,7 +796,6 @@ dialog:not([open]) {
 
 .settings-container {
   overflow-y: auto;
-  margin-top: 20px;
   height: 95%;
   width: 50%;
   border: 2px solid #b22222;
@@ -919,7 +919,7 @@ dialog:not([open]) {
 .settings-container::after {
   content: "";
   position: fixed;
-  bottom: -35px;
+  bottom: -25px;
   left: 50%;
   width: 48%;
   height: 100px;

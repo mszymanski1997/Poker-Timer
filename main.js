@@ -103,7 +103,7 @@ const fillBlindsObject = () => {
 
 	const allDurationInputs = document.querySelectorAll('.duration-input');
 	allDurationInputs.forEach((input) => {
-		blindsData.duration.push(validInput(input, 1));
+		blindsData.duration.push(validInput(input, 0));
 	});
 
 	const allBigBlindInputs = document.querySelectorAll('.big-blind-input');
@@ -125,6 +125,14 @@ const fillBlindsObject = () => {
 const checkRewindBtn = () => {
 	if (i == 0) {
 		rewindBtn.disabled = true;
+	} else {
+		rewindBtn.disabled = false;
+	}
+
+	if (i + 1 >= blindsData.bigBlind.length) {
+		forwardBtn.disabled = true;
+	} else {
+		forwardBtn.disabled = false;
 	}
 };
 
@@ -154,7 +162,6 @@ const hideSettings = () => {
 	settings.classList.remove('animation-start');
 	setValues();
 	settings.classList.add('animation-hide-start');
-
 	setBlinds();
 
 	if (i == blindsData.bigBlind.length - 1) {
@@ -234,7 +241,36 @@ const countTime = () => {
 		clearInterval(timerInterval);
 		audioChangeBlind.play();
 		i++;
-		changeBlinds();
+		if (i < blindsData.bigBlind.length) {
+			changeBlinds();
+		} else {
+			timerCounter.textContent = 'GAME OVER';
+			currentBlinds.textContent = '';
+			currentBlindsP.textContent = '';
+			nextBlinds.textContent = 'Add new blinds';
+			currentAnteP.style.visibility = 'hidden';
+		}
+	}
+};
+// Funkcja przełącza blindy na następne
+const changeBlinds = () => {
+	if (i >= blindsData.bigBlind.length && i > 0) {
+		clearInterval(timerInterval);
+		return;
+	} else {
+		currentBlindsP.textContent = 'Current Blinds';
+		currentAnteP.style.visibility = 'visible';
+		setBlinds();
+		checkRewindBtn();
+	}
+
+	time = blindsData.duration[i] * 60;
+	countTime();
+	timerInterval = setInterval(countTime, 1000);
+	console.log(i);
+
+	if (i == blindsData.bigBlind.length - 1) {
+		nextBlinds.textContent = 'Add new blinds';
 	}
 };
 
@@ -277,27 +313,6 @@ const handleForwardBtn = () => {
 
 	if (i !== 0) {
 		rewindBtn.disabled = false;
-	}
-};
-
-// Funkcja przełącza blindy na następne
-const changeBlinds = () => {
-	if (i >= blindsData.bigBlind.length && i > 0) {
-		timerCounter.textContent = 'GAME OVER';
-		currentBlinds.textContent = '';
-		currentBlindsP.textContent = '';
-		nextBlinds.textContent = 'Add new blinds';
-		clearInterval(timerInterval);
-	} else {
-		setBlinds();
-	}
-
-	time = blindsData.duration[i] * 60;
-	countTime();
-	timerInterval = setInterval(countTime, 1000);
-
-	if (i == blindsData.bigBlind.length - 1) {
-		nextBlinds.textContent = 'Add new blinds';
 	}
 };
 
@@ -364,7 +379,7 @@ const addNewBlinds = () => {
                 </label>
                 <label>
                     <p>Duration:</p>
-                    <input type="number" class="duration-input blind-input"  >
+                    <input type="number" class="duration-input blind-input" >
                 </label>
 
                 <button class="blinds-settings__btn delete-btn"><i class="fa-solid fa-xmark"></i></button>`;

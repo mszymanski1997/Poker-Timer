@@ -104,6 +104,7 @@ dialog:not([open]) {
 		font-size: 120px;
 		color: $main-light;
 		font-weight: bold;
+		text-align: center;
 	}
 
 	&__current-blinds {
@@ -286,7 +287,7 @@ dialog:not([open]) {
 
 .settings-container {
 	overflow-y: auto;
-	margin-top: 20px;
+	// margin-top: 10px;
 	height: 95%;
 	width: 50%;
 	@include container-style;
@@ -407,7 +408,7 @@ dialog:not([open]) {
 	&::after {
 		content: '';
 		position: fixed;
-		bottom: -35px;
+		bottom: -25px;
 		left: 50%;
 		width: 48%;
 		height: 100px;
