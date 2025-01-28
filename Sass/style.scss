@@ -348,7 +348,7 @@ dialog:not([open]) {
 
 	.solo-input {
 		margin-top: 20px;
-		width: 100%;
+		width: 50%;
 
 		p {
 			font-size: 28px;
@@ -587,7 +587,7 @@ dialog:not([open]) {
 }
 
 .animation-start {
-	animation: settings-move .5s forwards !important;
+	animation: settings-move 0.5s forwards !important;
 }
 
 .animation-hide-start {

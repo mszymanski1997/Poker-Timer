@@ -435,7 +435,7 @@
     position: fixed;
     bottom: -40px;
     left: 50%;
-    width: 93%;
+    width: 96%;
     height: 80px;
     background-color: #2a2929;
   }
@@ -857,7 +857,7 @@ dialog:not([open]) {
 }
 .settings-container .solo-input {
   margin-top: 20px;
-  width: 100%;
+  width: 50%;
 }
 .settings-container .solo-input p {
   font-size: 28px;
