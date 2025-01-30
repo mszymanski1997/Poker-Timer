@@ -57,6 +57,7 @@ let i = 0;
 let time = 25 * 60;
 let timerInterval;
 let validationErrors = [];
+let removedBlinds = [];
 let id = 0;
 const screenWidth = window.innerWidth;
 
@@ -69,6 +70,7 @@ const showSettings = () => {
 	allInputs.forEach((input) => {
 		input.addEventListener('input', (e) => updateInputsFontSize(e.target));
 	});
+	addIds();
 };
 
 // Funkcja uzupełnia tablice z blindami i ich długością, nadpisuje zmienną time
@@ -180,6 +182,8 @@ const hideSettings = () => {
 	setTimeout(() => {
 		settings.classList.toggle('disabled');
 	}, 400);
+
+	checkRewindBtn();
 };
 
 // Funkcja umieszcza wartości po bokach timera
@@ -395,6 +399,8 @@ const addNewBlinds = () => {
 	allDeleteBtns.forEach((deleteBtn) => {
 		deleteBtn.addEventListener('click', removeBlinds);
 	});
+
+	addIds();
 };
 
 const updateInputsFontSize = (input) => {
@@ -416,7 +422,23 @@ const updateInputsFontSize = (input) => {
 };
 // Funkcja usuwa blindy w ustawieniach ale tylko wizualnie
 const removeBlinds = (e) => {
-	e.target.closest('.settings-div').remove();
+	const settingDiv = e.target.closest('.settings-div');
+	settingDiv.remove();
+	if (settingDiv.id < i) {
+		i--;
+	}
+
+	if (settingDiv.id >= i) {
+		console.log('a');
+		time = blindsData.duration[i + 1] * 60;
+		minutes = Math.floor(time / 60);
+		seconds = time % 60;
+
+		seconds = seconds < 10 ? '0' + seconds : seconds;
+
+		timerCounter.textContent = `${minutes}:${seconds}`;
+		handlePlayBtn();
+	}
 };
 
 // Funckja ustawia wysokość blindów, teraźniejszych i przyszłych oraz ante w warstwie wizualnej
@@ -567,6 +589,16 @@ const updateFonteSize = () => {
 	}
 
 	currentBlinds.style.fontSize = `${fontSize}px`;
+};
+
+const addIds = () => {
+	id = 0;
+	const allSettingsDivs = document.querySelectorAll('.settings-div');
+	allSettingsDivs.forEach((settingDiv) => {
+		settingDiv.id = id;
+		id++;
+	});
+	console.log(allSettingsDivs);
 };
 
 checkRewindBtn();
