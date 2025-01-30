@@ -132,6 +132,12 @@
 				input {
 					height: 35px;
 					font-size: 13px;
+
+					&::placeholder {
+						font-size: 12px;
+						color: gray;
+						opacity: 0.7;
+					}
 				}
 			}
 

@@ -172,9 +172,11 @@ dialog:not([open]) {
 		color: $main-light;
 		font-size: 28px;
 		text-align: center;
+		display: flex;
+
 		margin-bottom: 80px;
 		position: absolute;
-		bottom: 16%;
+		bottom: 15%;
 		left: 51%;
 		transform: translateX(-50%);
 	}
@@ -532,6 +534,10 @@ dialog:not([open]) {
 
 				&:focus {
 					@include focus-style;
+				}
+
+				&::placeholder {
+					opacity: 0.7;
 				}
 			}
 		}

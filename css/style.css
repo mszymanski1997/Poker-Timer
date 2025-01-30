@@ -419,6 +419,16 @@
     height: 35px;
     font-size: 13px;
   }
+  body .settings-container label input::-moz-placeholder {
+    font-size: 12px;
+    color: gray;
+    opacity: 0.7;
+  }
+  body .settings-container label input::placeholder {
+    font-size: 12px;
+    color: gray;
+    opacity: 0.7;
+  }
   body .settings-container .solo-input {
     margin-top: 0;
     width: auto;
@@ -685,9 +695,10 @@ dialog:not([open]) {
   color: #e0e0e0;
   font-size: 28px;
   text-align: center;
+  display: flex;
   margin-bottom: 80px;
   position: absolute;
-  bottom: 16%;
+  bottom: 15%;
   left: 51%;
   transform: translateX(-50%);
 }
@@ -1041,6 +1052,12 @@ dialog:not([open]) {
   border: 2px solid #d73030;
   box-shadow: 0 6px 15px #d73030;
   outline: none;
+}
+.settings-container .blinds-settings label input::-moz-placeholder {
+  opacity: 0.7;
+}
+.settings-container .blinds-settings label input::placeholder {
+  opacity: 0.7;
 }
 .settings-container .blinds-settings__btn {
   position: relative;

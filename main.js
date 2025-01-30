@@ -79,22 +79,22 @@ const showSettings = () => {
 
 		if (currentID == i) {
 			input.addEventListener('input', (e) =>
-				handleDynamicChangeOfActualDurationInput(e.target.value)
+				dynamicChangeOfDuration(e.target.value)
 			);
 		}
 	});
 };
 
-const handleDynamicChangeOfActualDurationInput = (newTime) => {
+const dynamicChangeOfDuration = (newTime) => {
 	if (isNaN(parseInt(newTime))) {
 		console.warn('Błędna wartość inputa:', newTime);
 		return;
 	}
 
-	const timerText = timerCounter.textContent;
+	let timerText = timerCounter.textContent;
 
 	const currentTime =
-		timerText.length >= 5
+		timerText.length >= 4
 			? parseInt(timerText.slice(0, 2))
 			: parseInt(timerText.slice(0, 1));
 	const newInputTime = parseInt(newTime);
@@ -106,7 +106,11 @@ const handleDynamicChangeOfActualDurationInput = (newTime) => {
 	}
 
 	const timeAfterChanges =
-		currentTime > newInputTime
+		timerText.slice(-2) == '00'
+			? currentTime > newInputTime
+				? currentTime - differnce
+				: currentTime + differnce
+			: currentTime > newInputTime
 			? currentTime - differnce - 1
 			: currentTime + differnce - 1;
 
@@ -118,7 +122,7 @@ const handleDynamicChangeOfActualDurationInput = (newTime) => {
 
 	seconds = seconds < 10 ? '0' + seconds : seconds;
 
-	timerText = `${minutes}:${seconds}`;
+	timerCounter.textContent = `${minutes}:${seconds}`;
 
 	console.log('Stary czas to: ', currentTime);
 	console.log('Nowy czas to:', newInputTime);
