@@ -385,7 +385,7 @@ const addNewBlinds = () => {
                 </label>
                 <label>
                     <p>Duration:</p>
-                    <input type="number" class="duration-input blind-input" >
+                    <input type="number" class="duration-input blind-input" placeholder="Minutes" >
                 </label>
 
                 <button class="blinds-settings__btn delete-btn"><i class="fa-solid fa-xmark"></i></button>`;
@@ -521,7 +521,7 @@ const loadFromLocalStorage = () => {
 		  </label>
 		  <label>
 			<p>Duration:</p>
-			<input type="number" class="duration-input blind-input" step="10" value="${duration}">
+			<input type="number" class="duration-input blind-input" step="10" value="${duration}" placeholder="Minutes" >
 		  </label>
 		  <button class="blinds-settings__btn delete-btn"><i class="fa-solid fa-xmark"></i></button>`;
 				settingsContainer.appendChild(newBlinds);
