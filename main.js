@@ -10,6 +10,7 @@ const currentBlinds = document.querySelector('.current-blinds');
 const currentBlindsP = document.querySelector('.current-blinds-text');
 const currentAnteP = document.querySelector('.timer__ante');
 const currentAnte = document.querySelector('.current-ante');
+const currentLevel = document.querySelector('.current-lvl');
 const playBtn = document.querySelector('.play-btn');
 const pauseBtn = document.querySelector('.pause-btn');
 const settingsBtn = document.querySelector('.settings-btn');
@@ -253,6 +254,7 @@ const countTime = () => {
 			currentBlindsP.textContent = '';
 			nextBlinds.textContent = 'Add new blinds';
 			currentAnteP.style.visibility = 'hidden';
+			currentLevel.textContent = 'GAME OVER';
 		}
 	}
 };
@@ -463,7 +465,7 @@ const setBlinds = () => {
 			blindsData.smallBlind[i + 1]
 		}`;
 	}
-
+	currentLevel.textContent = i;
 	updateFonteSize();
 };
 
