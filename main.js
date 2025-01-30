@@ -72,6 +72,59 @@ const showSettings = () => {
 		input.addEventListener('input', (e) => updateInputsFontSize(e.target));
 	});
 	addIds();
+
+	const allDurationInputs = document.querySelectorAll('.duration-input');
+	allDurationInputs.forEach((input) => {
+		const currentID = input.closest('.settings-div').id;
+
+		if (currentID == i) {
+			input.addEventListener('input', (e) =>
+				handleDynamicChangeOfActualDurationInput(e.target.value)
+			);
+		}
+	});
+};
+
+const handleDynamicChangeOfActualDurationInput = (newTime) => {
+	if (isNaN(parseInt(newTime))) {
+		console.warn('Błędna wartość inputa:', newTime);
+		return;
+	}
+
+	const timerText = timerCounter.textContent;
+
+	const currentTime =
+		timerText.length >= 5
+			? parseInt(timerText.slice(0, 2))
+			: parseInt(timerText.slice(0, 1));
+	const newInputTime = parseInt(newTime);
+	let differnce;
+	if (currentTime > newInputTime) {
+		differnce = currentTime - newInputTime;
+	} else {
+		differnce = newInputTime - currentTime;
+	}
+
+	const timeAfterChanges =
+		currentTime > newInputTime
+			? currentTime - differnce - 1
+			: currentTime + differnce - 1;
+
+	const currentSeconds = timerText.slice(-2);
+
+	time = timeAfterChanges * 60 + parseInt(currentSeconds);
+	minutes = timeAfterChanges;
+	seconds = parseInt(currentSeconds);
+
+	seconds = seconds < 10 ? '0' + seconds : seconds;
+
+	timerText = `${minutes}:${seconds}`;
+
+	console.log('Stary czas to: ', currentTime);
+	console.log('Nowy czas to:', newInputTime);
+	console.log('Różnica to:', differnce);
+	console.log('Nowy czas to będzie', timeAfterChanges);
+	console.log('A sekundy to:', currentSeconds);
 };
 
 // Funkcja uzupełnia tablice z blindami i ich długością, nadpisuje zmienną time
@@ -465,7 +518,7 @@ const setBlinds = () => {
 			blindsData.smallBlind[i + 1]
 		}`;
 	}
-	currentLevel.textContent = i;
+	currentLevel.textContent = i + 1;
 	updateFonteSize();
 };
 
