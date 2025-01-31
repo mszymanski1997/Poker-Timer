@@ -84,6 +84,7 @@ const showSettings = () => {
 	});
 };
 
+// Funkcja umożliwia edycje długości obecnego blinda poprzez zwiększenie lub zmniejszenie jego o róznice nowego
 const dynamicChangeOfDuration = (newTime) => {
 	if (isNaN(parseInt(newTime))) {
 		console.warn('Błędna wartość inputa:', newTime);
@@ -472,6 +473,7 @@ const addNewBlinds = () => {
 	addIds();
 };
 
+// Funkcja zmniejsza czcionkę w inpucie w zależnośći od roździelczości i liczby cyfr w nim 
 const updateInputsFontSize = (input) => {
 	const inputNumber = parseInt(input.value);
 
@@ -489,6 +491,7 @@ const updateInputsFontSize = (input) => {
 		}
 	}
 };
+
 // Funkcja usuwa blindy w ustawieniach ale tylko wizualnie
 const removeBlinds = (e) => {
 	const settingDiv = e.target.closest('.settings-div');
@@ -660,6 +663,7 @@ const updateFonteSize = () => {
 	currentBlinds.style.fontSize = `${fontSize}px`;
 };
 
+// Funkcja dodaję id dla dynamicznie pojawiających sie divów z blindami lub przerwami 
 const addIds = () => {
 	id = 0;
 	const allSettingsDivs = document.querySelectorAll('.settings-div');

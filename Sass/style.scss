@@ -22,18 +22,6 @@ body {
 	overflow: hidden;
 }
 
-input[type='number'] {
-	-moz-appearance: textfield;
-	-webkit-appearance: none;
-	appearance: none;
-}
-
-input[type='number']::-webkit-inner-spin-button,
-input[type='number']::-webkit-outer-spin-button {
-	-webkit-appearance: none;
-	margin: 0;
-}
-
 dialog {
 	all: unset;
 }
@@ -52,7 +40,6 @@ dialog:not([open]) {
 	display: flex;
 	justify-content: space-evenly;
 	align-items: center;
-	// display: none;
 }
 
 .info-panel {
@@ -173,12 +160,6 @@ dialog:not([open]) {
 		font-size: 28px;
 		text-align: center;
 		margin-top: -50px;
-
-		// margin-bottom: 80px;
-		// position: absolute;
-		// bottom: 15%;
-		// left: 51%;
-		// transform: translateX(-50%);
 	}
 }
 
@@ -289,7 +270,6 @@ dialog:not([open]) {
 
 .settings-container {
 	overflow-y: auto;
-	// margin-top: 10px;
 	height: 95%;
 	width: 50%;
 	@include container-style;
@@ -438,12 +418,22 @@ dialog:not([open]) {
 			gap: 30px;
 			height: 100%;
 
+			input[type='number'] {
+				-moz-appearance: textfield;
+				-webkit-appearance: none;
+				appearance: none;
+			}
+
+			input[type='number']::-webkit-inner-spin-button,
+			input[type='number']::-webkit-outer-spin-button {
+				-webkit-appearance: none;
+				margin: 0;
+			}
+
 			.break-label {
 				color: #f0f0f0;
 				font-size: 14px;
 				margin-right: 10px;
-				display: inline;
-				display: inline-block;
 				white-space: nowrap;
 			}
 

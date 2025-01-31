@@ -9,7 +9,6 @@
 			width: 100%;
 			border-radius: 0;
 			position: relative;
-			max-width: 100vw;
 
 			.timer {
 				width: 100%;
@@ -46,10 +45,6 @@
 
 						.fa-pause {
 							font-size: 20px;
-						}
-
-						&:first-child {
-							margin: 0;
 						}
 					}
 				}
@@ -106,8 +101,6 @@
 			border: none;
 			box-shadow: none;
 			border-radius: 0;
-			display: flex;
-			margin-top: 0px;
 			padding-bottom: 100px;
 
 			&__medium {
@@ -159,13 +152,10 @@
 			}
 
 			&::after {
-				content: '';
-				position: fixed;
 				bottom: -40px;
 				left: 50%;
 				width: 96%;
 				height: 80px;
-				background-color: lighten($main-dark, 5%);
 			}
 
 			&__add-blind {
@@ -183,25 +173,13 @@
 				width: 50px;
 				height: 50px;
 				font-size: 10px;
-				bottom: 1.5%;
+				bottom: 2%;
 			}
 
 			.blinds-settings {
-				display: flex;
-				justify-content: space-evenly;
-				align-items: center;
-				margin-top: 20px;
-				width: 100%;
-
-				&:last-child {
-					margin-bottom: 30px;
-				}
-
 				label {
 					p {
-						margin-bottom: 5px;
 						font-size: 11px;
-						margin-left: 5px;
 					}
 
 					input {
@@ -213,29 +191,15 @@
 				}
 
 				&__btn {
-					position: relative;
-					@include container-style;
-					border-radius: 12px;
 					height: 66%;
 					padding: 6px 24px;
-					background-color: $main-dark;
-					cursor: pointer;
-					transition: scale 0.3s;
-					color: $main-light;
-					font-size: 17px;
-					font-weight: bold;
 
 					&:hover {
 						scale: 0.9;
 					}
 
 					i {
-						color: $main-light;
 						font-size: 20px;
-						position: absolute;
-						top: 50%;
-						left: 50%;
-						transform: translate(-50%, -50%);
 					}
 				}
 			}
@@ -274,6 +238,9 @@
 			.settings-container {
 				.blinds-settings {
 					label {
+						p {
+							font-size: 9px;
+						}
 						input {
 							width: 90%;
 						}

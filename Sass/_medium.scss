@@ -1,3 +1,17 @@
+@media (max-width: 1200px) {
+	input[type='number'] {
+		-moz-appearance: textfield;
+		-webkit-appearance: none;
+		appearance: none;
+	}
+
+	input[type='number']::-webkit-inner-spin-button,
+	input[type='number']::-webkit-outer-spin-button {
+		-webkit-appearance: none;
+		margin: 0;
+	}
+}
+
 @media (min-width: 910px) and (max-width: 1450px) {
 	.container {
 		.info-panel,
@@ -101,11 +115,11 @@
 			}
 
 			.confirm-btn {
-				width: 70px;
-				height: 70px;
+				width: 75px;
+				height: 75px;
 				z-index: 2;
 				margin-top: 10px;
-				bottom: 4%;
+				bottom: 2%;
 
 				i {
 					font-size: 40px;
@@ -130,54 +144,18 @@
 				left: 60%;
 			}
 
-			.settings-container__break {
-				position: relative;
-				background-color: #1d1c1c;
-				width: 100%;
-				height: 45px;
-				// min-height: 45px;
-				border-radius: 12px;
+			&__btn {
 				display: flex;
 				align-items: center;
 				justify-content: center;
-				padding: 0 15px;
-				margin-top: 20px;
+				width: 110px;
+				height: 73px;
+				padding: 6px 24px;
+				bottom: 2%;
+				font-size: 16px;
 
-				.input-field {
-					display: flex;
-					justify-content: center;
-					align-items: center;
-					gap: 30px;
-					height: 100%;
-
-					.break-label {
-						color: #f0f0f0;
-						font-size: 14px;
-						margin-right: 10px;
-						display: inline;
-						display: inline-block;
-						white-space: nowrap;
-					}
-
-					.break-input {
-						height: 70%;
-						width: 60px;
-						background-color: #333;
-						color: #fff;
-						border: none;
-						border-radius: 6px;
-						text-align: center;
-						font-size: 14px;
-
-						&:focus {
-							outline: none;
-							box-shadow: 0 0 5px #444;
-
-							&::placeholder {
-								color: #bbb;
-							}
-						}
-					}
+				&:hover {
+					scale: 1;
 				}
 			}
 		}
