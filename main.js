@@ -123,12 +123,6 @@ const dynamicChangeOfDuration = (newTime) => {
 	seconds = seconds < 10 ? '0' + seconds : seconds;
 
 	timerCounter.textContent = `${minutes}:${seconds}`;
-
-	console.log('Stary czas to: ', currentTime);
-	console.log('Nowy czas to:', newInputTime);
-	console.log('Różnica to:', differnce);
-	console.log('Nowy czas to będzie', timeAfterChanges);
-	console.log('A sekundy to:', currentSeconds);
 };
 
 // Funkcja uzupełnia tablice z blindami i ich długością, nadpisuje zmienną time
@@ -242,6 +236,22 @@ const hideSettings = () => {
 	}, 400);
 
 	checkRewindBtn();
+
+	if (timerCounter.textContent === 'GAME OVER') {
+		currentBlinds.textContent = '';
+	}
+
+	if (
+		timerCounter.textContent === 'GAME OVER' &&
+		i < blindsData.duration.length
+	) {
+		currentBlindsP.textContent = 'Current Blinds';
+		currentAnteP.style.visibility = 'visible';
+		currentBlinds.textContent = `${blindsData.bigBlind[i]}/${blindsData.smallBlind[i]}`;
+		time = blindsData.duration[i] * 60;
+		currentBlinds = countTime();
+		timerInterval = setInterval(countTime, 1000);
+	}
 };
 
 // Funkcja umieszcza wartości po bokach timera
