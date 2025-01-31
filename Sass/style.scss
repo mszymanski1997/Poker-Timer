@@ -198,10 +198,11 @@ dialog:not([open]) {
 	top: 0;
 	left: 0;
 	width: 100%;
+	max-width: 100vw;
 	min-height: 100vh;
 	height: 100vh;
 	transform: translateX(100%);
-	background-image: url('https://cdn.pixabay.com/photo/2016/03/13/11/47/roulette-1253626_1280.jpg');
+	background-image: url('https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
 	background-size: cover;
 	background-attachment: fixed;
 	display: flex;
@@ -271,7 +272,7 @@ dialog:not([open]) {
 .settings-container {
 	overflow-y: auto;
 	height: 95%;
-	width: 50%;
+	width: 55%;
 	@include container-style;
 	border-radius: 12px;
 	background-color: lighten($main-dark, 5%);
@@ -282,6 +283,14 @@ dialog:not([open]) {
 	align-items: center;
 	position: relative;
 	padding-bottom: 100px;
+
+	&::-webkit-scrollbar {
+		width: 0px;
+		display: none;
+	}
+
+	scrollbar-width: none;
+	-ms-overflow-style: none;
 
 	&__medium {
 		display: contents;
@@ -392,7 +401,7 @@ dialog:not([open]) {
 		position: fixed;
 		bottom: -25px;
 		left: 50%;
-		width: 48%;
+		width: 53%;
 		height: 100px;
 		background-color: lighten($main-dark, 5%);
 		transform: translate(-50%, -50%);
@@ -507,12 +516,17 @@ dialog:not([open]) {
 		justify-content: space-evenly;
 		margin-top: 20px;
 		width: 100%;
+		max-width: 100vw;
 
 		&:last-child {
 			margin-bottom: 30px;
 		}
 
 		label {
+			display: flex;
+			flex-direction: column;
+			width: 38%;
+
 			p {
 				margin-bottom: 5px;
 				font-size: 15px;

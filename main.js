@@ -17,7 +17,6 @@ const settingsBtn = document.querySelector('.settings-btn');
 const rewindBtn = document.querySelector('.rewind-btn');
 const forwardBtn = document.querySelector('.forward-btn');
 const playIcon = document.querySelector('#play-icon');
-// const container = document.querySelector('.container');
 // Main page - right list
 const playersIn = document.querySelector('.players-in');
 const totalMoney = document.querySelector('.total-money');
@@ -453,7 +452,7 @@ const addNewBlinds = () => {
                 </label>
                 <label>
                     <p>Duration:</p>
-                    <input type="number" class="duration-input blind-input" placeholder="Minutes" >
+                    <input type="number" class="duration-input blind-input" placeholder="Minutes" min='0' >
                 </label>
 
                 <button class="blinds-settings__btn delete-btn"><i class="fa-solid fa-xmark"></i></button>`;
@@ -473,7 +472,7 @@ const addNewBlinds = () => {
 	addIds();
 };
 
-// Funkcja zmniejsza czcionkę w inpucie w zależnośći od roździelczości i liczby cyfr w nim 
+// Funkcja zmniejsza czcionkę w inpucie w zależnośći od roździelczości i liczby cyfr w nim
 const updateInputsFontSize = (input) => {
 	const inputNumber = parseInt(input.value);
 
@@ -485,6 +484,17 @@ const updateInputsFontSize = (input) => {
 				if (inputNumber >= 1000000) {
 					input.style.fontSize = '8px';
 				}
+			}
+		} else {
+			input.style.fontSize = '15px';
+		}
+	}
+
+	if (screenWidth > 1450) {
+		if (inputNumber >= 100000) {
+			input.style.fontSize = '13px';
+			if (inputNumber >= 10000000) {
+				input.style.fontSize = '11px';
 			}
 		} else {
 			input.style.fontSize = '15px';
@@ -663,7 +673,7 @@ const updateFonteSize = () => {
 	currentBlinds.style.fontSize = `${fontSize}px`;
 };
 
-// Funkcja dodaję id dla dynamicznie pojawiających sie divów z blindami lub przerwami 
+// Funkcja dodaję id dla dynamicznie pojawiających sie divów z blindami lub przerwami
 const addIds = () => {
 	id = 0;
 	const allSettingsDivs = document.querySelectorAll('.settings-div');
