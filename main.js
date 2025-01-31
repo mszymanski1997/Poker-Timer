@@ -169,9 +169,6 @@ const fillBlindsObject = () => {
 			blindsData.bigBlind.push(validInput(input, 1));
 		}
 	});
-
-	console.log(blindsData);
-	console.log(i);
 };
 
 // Funkcja sprawdza czy w tablicach już coś jest, jeśli nie to wyłącza btn do ich cofania
@@ -238,17 +235,18 @@ const hideSettings = () => {
 
 	if (timerCounter.textContent === 'GAME OVER') {
 		currentBlinds.textContent = '';
+		nextBlinds.textContent = 'Add new blinds';
 	}
 
 	if (
 		timerCounter.textContent === 'GAME OVER' &&
 		i < blindsData.duration.length
 	) {
+		clearInterval(timerInterval);
 		currentBlindsP.textContent = 'Current Blinds';
 		currentAnteP.style.visibility = 'visible';
 		currentBlinds.textContent = `${blindsData.bigBlind[i]}/${blindsData.smallBlind[i]}`;
 		time = blindsData.duration[i] * 60;
-		currentBlinds = countTime();
 		timerInterval = setInterval(countTime, 1000);
 	}
 };
@@ -405,16 +403,47 @@ const addBreak = () => {
 	settingsContainer.appendChild(newBlinds);
 	settingsContainer.scrollTop = settingsContainer.scrollHeight;
 
-	const allBreaksBtn = document.querySelectorAll(
-		'.settings-container__break-btn'
-	);
+	const allDeleteBtn = document.querySelectorAll('.delete-btn');
 
-	allBreaksBtn.forEach((btn) => btn.addEventListener('click', deleteBreak));
+	allDeleteBtn.forEach((btn) =>
+		btn.addEventListener('click', removeSettingsDiv)
+	);
 };
 
-// Funkcja usuwa przerwe
-const deleteBreak = (e) => {
-	e.target.closest('.settings-div').remove();
+// Funkcja diva z ustawieniami wizualnie i jego dane z obiektów
+const removeSettingsDiv = (e) => {
+	const settingDiv = e.target.closest('.settings-div');
+	const removedId = parseInt(settingDiv.id, 10);
+	settingDiv.remove();
+
+	if (removedId < i) {
+		console.log('id < i');
+		const allSettingsDivs = document.querySelectorAll('.settings-div');
+		allSettingsDivs.forEach((settingDiv) => {
+			settingDiv.id = settingDiv.id - 1;
+		});
+		console.log(allSettingsDivs);
+		i--;
+	} else if (removedId == i) {
+		console.log('Usunięto aktualny blind, przechodzimy do kolejnego');
+		time = blindsData.duration[i + 1] * 60;
+		minutes = Math.floor(time / 60);
+		seconds = time % 60;
+		seconds = seconds < 10 ? '0' + seconds : seconds;
+
+		timerCounter.textContent = `${minutes}:${seconds}`;
+		handlePlayBtn();
+
+		if (i + 1 >= blindsData.duration.length) {
+			console.log('id = i');
+			timerCounter.textContent = 'GAME OVER';
+			currentBlinds.textContent = '';
+			currentBlindsP.textContent = '';
+			currentAnteP.style.visibility = 'hidden';
+			currentLevel.textContent = 'GAME OVER';
+			nextBlinds.textContent = 'Add new blinds';
+		}
+	}
 };
 
 // Funckja otwiera modal
@@ -464,10 +493,10 @@ const addNewBlinds = () => {
 		input.addEventListener('input', (e) => updateInputsFontSize(e.target));
 	});
 
-	const allDeleteBtns = document.querySelectorAll('.blinds-settings__btn');
-	allDeleteBtns.forEach((deleteBtn) => {
-		deleteBtn.addEventListener('click', removeBlinds);
-	});
+	const allDeleteBtn = document.querySelectorAll('.delete-btn');
+	allDeleteBtn.forEach((btn) =>
+		btn.addEventListener('click', removeSettingsDiv)
+	);
 
 	addIds();
 };
@@ -499,27 +528,6 @@ const updateInputsFontSize = (input) => {
 		} else {
 			input.style.fontSize = '15px';
 		}
-	}
-};
-
-// Funkcja usuwa blindy w ustawieniach ale tylko wizualnie
-const removeBlinds = (e) => {
-	const settingDiv = e.target.closest('.settings-div');
-	settingDiv.remove();
-	if (settingDiv.id < i) {
-		i--;
-	}
-
-	if (settingDiv.id >= i) {
-		console.log('a');
-		time = blindsData.duration[i + 1] * 60;
-		minutes = Math.floor(time / 60);
-		seconds = time % 60;
-
-		seconds = seconds < 10 ? '0' + seconds : seconds;
-
-		timerCounter.textContent = `${minutes}:${seconds}`;
-		handlePlayBtn();
 	}
 };
 
@@ -607,7 +615,7 @@ const loadFromLocalStorage = () => {
 				settingsContainer.appendChild(newBlinds);
 
 				const deleteBtn = newBlinds.querySelector('.blinds-settings__btn');
-				deleteBtn.addEventListener('click', removeBlinds);
+				deleteBtn.addEventListener('click', removeSettingsDiv);
 			} else if (type === 'break') {
 				let newBreak = document.createElement('div');
 				newBreak.setAttribute(
@@ -627,7 +635,7 @@ const loadFromLocalStorage = () => {
 				const deleteBreakBtn = newBreak.querySelector(
 					'.settings-container__break-btn'
 				);
-				deleteBreakBtn.addEventListener('click', deleteBreak);
+				deleteBreakBtn.addEventListener('click', removeSettingsDiv);
 			}
 		}
 	);
