@@ -59,6 +59,7 @@ let timerInterval;
 let validationErrors = [];
 let id = 0;
 const screenWidth = window.innerWidth;
+let everythingWasDeleted = false;
 
 // Funkcja pokazuje ustawienia
 const showSettings = () => {
@@ -232,6 +233,20 @@ const hideSettings = () => {
 	}, 400);
 
 	checkRewindBtn();
+
+	if (everythingWasDeleted) {
+		i = 0;
+		clearInterval(timerInterval);
+		currentBlindsP.textContent = 'Current Blinds';
+		currentAnteP.style.visibility = 'visible';
+		currentBlinds.textContent = `${blindsData.bigBlind[i]}/${blindsData.smallBlind[i]}`;
+		time = blindsData.duration[i] * 60;
+		minutes = Math.floor(time / 60);
+		seconds = time % 60;
+		seconds = seconds < 10 ? '0' + seconds : seconds;
+		timerCounter.textContent = `${minutes}:${seconds}`;
+		everythingWasDeleted = false;
+	}
 
 	if (timerCounter.textContent === 'GAME OVER') {
 		currentBlinds.textContent = '';
@@ -425,7 +440,6 @@ const removeSettingsDiv = (e) => {
 		console.log(allSettingsDivs);
 		i--;
 	} else if (removedId == i) {
-		console.log('Usunięto aktualny blind, przechodzimy do kolejnego');
 		time = blindsData.duration[i + 1] * 60;
 		minutes = Math.floor(time / 60);
 		seconds = time % 60;
@@ -443,6 +457,13 @@ const removeSettingsDiv = (e) => {
 			currentLevel.textContent = 'GAME OVER';
 			nextBlinds.textContent = 'Add new blinds';
 		}
+	}
+
+	console.log(i);
+
+	if (!settingsContainer.querySelector('.settings-div')) {
+		// console.log('widze');
+		everythingWasDeleted = true;
 	}
 };
 
