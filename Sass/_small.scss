@@ -53,7 +53,7 @@
 
 				&__ante {
 					font-size: 22px;
-					bottom: 30px;
+					margin-top: -15px;
 				}
 			}
 
@@ -90,6 +90,7 @@
 			border-radius: 0;
 			display: flex;
 			box-shadow: none;
+			padding-bottom: 125px;
 
 			&__medium {
 				display: flex;

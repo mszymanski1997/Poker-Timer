@@ -58,7 +58,6 @@ let i = 0;
 let time = 25 * 60;
 let timerInterval;
 let validationErrors = [];
-let removedBlinds = [];
 let id = 0;
 const screenWidth = window.innerWidth;
 
@@ -157,7 +156,7 @@ const fillBlindsObject = () => {
 
 	const allDurationInputs = document.querySelectorAll('.duration-input');
 	allDurationInputs.forEach((input) => {
-		blindsData.duration.push(validInput(input, 0));
+		blindsData.duration.push(validInput(input, 1));
 	});
 
 	const allBigBlindInputs = document.querySelectorAll('.big-blind-input');
@@ -322,6 +321,7 @@ const countTime = () => {
 			nextBlinds.textContent = 'Add new blinds';
 			currentAnteP.style.visibility = 'hidden';
 			currentLevel.textContent = 'GAME OVER';
+			handlePlayBtn();
 		}
 	}
 };

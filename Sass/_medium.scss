@@ -61,7 +61,7 @@
 
 			&__ante {
 				font-size: 22px;
-				bottom: 18%;
+				margin-top: -35px;
 			}
 		}
 	}
@@ -74,6 +74,7 @@
 			margin-top: 0;
 			border: none;
 			border-radius: 0;
+			padding-bottom: 150px;
 
 			&__medium {
 				display: flex;
@@ -127,6 +128,57 @@
 
 			&__add-break {
 				left: 60%;
+			}
+
+			.settings-container__break {
+				position: relative;
+				background-color: #1d1c1c;
+				width: 100%;
+				height: 45px;
+				// min-height: 45px;
+				border-radius: 12px;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				padding: 0 15px;
+				margin-top: 20px;
+
+				.input-field {
+					display: flex;
+					justify-content: center;
+					align-items: center;
+					gap: 30px;
+					height: 100%;
+
+					.break-label {
+						color: #f0f0f0;
+						font-size: 14px;
+						margin-right: 10px;
+						display: inline;
+						display: inline-block;
+						white-space: nowrap;
+					}
+
+					.break-input {
+						height: 70%;
+						width: 60px;
+						background-color: #333;
+						color: #fff;
+						border: none;
+						border-radius: 6px;
+						text-align: center;
+						font-size: 14px;
+
+						&:focus {
+							outline: none;
+							box-shadow: 0 0 5px #444;
+
+							&::placeholder {
+								color: #bbb;
+							}
+						}
+					}
+				}
 			}
 		}
 	}
