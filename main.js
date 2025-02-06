@@ -1,47 +1,38 @@
-// Main page - left list
-const nextBlinds = document.querySelector('.next-blinds');
-const averageStack = document.querySelector('.average-stack');
-const buyIns = document.querySelector('.buy-ins');
-const rebuys = document.querySelector('.rebuys');
-const totalChips = document.querySelector('.total-chips');
-// Main page - timer
-const timerCounter = document.querySelector('.timer__counter');
-const currentBlinds = document.querySelector('.current-blinds');
-const currentBlindsP = document.querySelector('.current-blinds-text');
-const currentAnteP = document.querySelector('.timer__ante');
-const currentAnte = document.querySelector('.current-ante');
-const currentLevel = document.querySelector('.current-lvl');
-const playBtn = document.querySelector('.play-btn');
-const pauseBtn = document.querySelector('.pause-btn');
-const settingsBtn = document.querySelector('.settings-btn');
-const rewindBtn = document.querySelector('.rewind-btn');
-const forwardBtn = document.querySelector('.forward-btn');
-const playIcon = document.querySelector('#play-icon');
-// Main page - right list
-const playersIn = document.querySelector('.players-in');
-const totalMoney = document.querySelector('.total-money');
-const firstReward = document.querySelector('.first-reward');
-const secondReward = document.querySelector('.second-reward');
-//  Settings
-const settings = document.querySelector('.settings');
-const settingsContainer = document.querySelector('.settings-container');
-const buyInsInput = document.querySelector('.buy-ins-input');
-const buyInValueInput = document.querySelector('.buy-in-value-input');
-const rebuysInput = document.querySelector('.rebuys-input');
-const startingStackInput = document.querySelector('.starting-stack-input');
-const playersInInput = document.querySelector('.players-in-input');
-const confirmBtn = document.querySelector('.confirm-btn');
-const addBtn = document.querySelector('.add-btn');
-// Blind settings
-const deleteBtn = document.querySelector('.delete-btn');
-const bigBlindInput = document.querySelector('.big-blind-input');
-const smallBlindInput = document.querySelector('.small-blind-input');
-//Break
-const addBlindBtn = document.querySelector('.settings-container__add-blind');
-const addBreakBtn = document.querySelector('.settings-container__add-break ');
-const breakModal = document.querySelector('.break-modal');
-const closeModalBtn = document.querySelector('.close-modal');
-const warningMessage = document.querySelector('.warning');
+import {
+	nextBlinds,
+	averageStack,
+	buyIns,
+	rebuys,
+	totalChips,
+	timerCounter,
+	currentBlinds,
+	currentBlindsP,
+	currentAnteP,
+	currentAnte,
+	currentLevel,
+	playBtn,
+	settingsBtn,
+	rewindBtn,
+	forwardBtn,
+	playIcon,
+	playersIn,
+	totalMoney,
+	firstReward,
+	secondReward,
+	settings,
+	settingsContainer,
+	buyInsInput,
+	buyInValueInput,
+	rebuysInput,
+	startingStackInput,
+	confirmBtn,
+	playersInInput,
+	addBlindBtn,
+	addBreakBtn,
+	breakModal,
+	closeModalBtn,
+	warningMessage,
+} from './dom-elements.js';
 
 const blindsData = {
 	bigBlind: [],
@@ -528,9 +519,9 @@ const updateInputsFontSize = (input) => {
 	if (screenWidth <= 549) {
 		if (inputNumber >= 10000) {
 			input.style.fontSize = '12px';
-			if (inputNumber >= 100000) {
+			if (inputNumber >= 1000000) {
 				input.style.fontSize = '10px';
-				if (inputNumber >= 1000000) {
+				if (inputNumber >= 100000000) {
 					input.style.fontSize = '8px';
 				}
 			}
