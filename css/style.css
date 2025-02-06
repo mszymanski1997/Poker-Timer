@@ -34,7 +34,7 @@
     font-size: 20px;
   }
   .container .timer__current-blinds span {
-    font-size: 90px;
+    font-size: 80px;
   }
   .container .timer__current-blinds span:first-child {
     font-size: 20px;
@@ -300,13 +300,13 @@
     display: none;
   }
   body .container .timer__counter {
-    font-size: 100px;
+    font-size: 90px;
   }
   body .container .timer__current-blinds .current-blinds-text {
     font-size: 20px;
   }
   body .container .timer__current-blinds span {
-    font-size: 90px;
+    font-size: 70px;
   }
   body .container .timer__buttons {
     gap: 10px;
@@ -454,13 +454,13 @@
 }
 @media (max-width: 400px) {
   body .container .timer__counter {
-    font-size: 80px;
+    font-size: 70px;
   }
   body .container .timer__current-blinds .current-blinds-text {
     font-size: 16px;
   }
   body .container .timer__current-blinds span {
-    font-size: 70px;
+    font-size: 60px;
   }
   body .container .timer__buttons {
     gap: 5px;

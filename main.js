@@ -462,7 +462,6 @@ const removeSettingsDiv = (e) => {
 	console.log(i);
 
 	if (!settingsContainer.querySelector('.settings-div')) {
-		// console.log('widze');
 		everythingWasDeleted = true;
 	}
 };
@@ -557,25 +556,26 @@ const setBlinds = () => {
 	if (blindsData.bigBlind[i] === 'BREAK') {
 		currentBlinds.textContent = 'BREAK';
 	} else {
-		currentBlinds.textContent = `${blindsData.bigBlind[i]}/${blindsData.smallBlind[i]}`;
+		currentBlinds.textContent = `${formatBlind(
+			blindsData.bigBlind[i]
+		)}/${formatBlind(blindsData.smallBlind[i])}`;
 	}
 
 	if (blindsData.ante[i] === 'BREAK') {
 		currentAnteP.classList.add('disabled');
 	} else {
 		currentAnteP.classList.remove('disabled');
-		currentAnte.textContent = blindsData.ante[i];
+		currentAnte.textContent = formatBlind(blindsData.ante[i]);
 	}
 
 	if (blindsData.bigBlind[i + 1] === 'BREAK') {
 		nextBlinds.textContent = 'BREAK';
 	} else {
-		nextBlinds.textContent = `${blindsData.bigBlind[i + 1]} / ${
-			blindsData.smallBlind[i + 1]
-		}`;
+		nextBlinds.textContent = `${formatBlind(
+			blindsData.bigBlind[i + 1]
+		)}/${formatBlind(blindsData.smallBlind[i + 1])}`;
 	}
 	currentLevel.textContent = i + 1;
-	updateFonteSize();
 };
 
 // Funkcja do zapisania  divów w localStorage
@@ -662,44 +662,14 @@ const loadFromLocalStorage = () => {
 	);
 };
 
-// Funkcja zmniejsza czcionkę jak big blind jest tak dużą cyfrą żeby wychodziło poza przewidziany obszar
-const updateFonteSize = () => {
-	let fontSize;
-
-	if (screenWidth > 1450 && parseInt(blindsData.bigBlind[i]) >= 100000) {
-		fontSize = 80;
-	} else if (
-		screenWidth <= 1450 &&
-		screenWidth >= 910 &&
-		parseInt(blindsData.bigBlind[i]) >= 10000
-	) {
-		fontSize = 60;
-		if (parseInt(blindsData.bigBlind[i]) >= 100000) {
-			fontSize = 50;
-			if (parseInt(blindsData.bigBlind[i]) >= 1000000) {
-				fontSize = 40;
-			}
-		}
-	} else if (
-		screenWidth >= 600 &&
-		screenWidth <= 909 &&
-		parseInt(blindsData.bigBlind[i]) >= 10000
-	) {
-		fontSize = 70;
-		if (parseInt(blindsData.bigBlind[i]) >= 1000000) {
-			fontSize = 50;
-		}
-	} else if (screenWidth < 600 && parseInt(blindsData.bigBlind[i]) >= 1000) {
-		fontSize = 65;
-		if (parseInt(blindsData.bigBlind[i]) >= 10000) {
-			fontSize = 40;
-			if (parseInt(blindsData.bigBlind[i]) >= 1000000) {
-				fontSize = 25;
-			}
-		}
+// Funkcja formatuje blindy żeby znp zamiast 1000000 pokazywały 1M
+const formatBlind = (value) => {
+	if (value >= 1000000) {
+		return (value / 1000000).toFixed(1).replace('.0', '') + 'M';
+	} else if (value >= 10000) {
+		return (value / 1000).toFixed(1).replace('.0', '') + 'K';
 	}
-
-	currentBlinds.style.fontSize = `${fontSize}px`;
+	return value;
 };
 
 // Funkcja dodaję id dla dynamicznie pojawiających sie divów z blindami lub przerwami
