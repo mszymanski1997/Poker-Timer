@@ -51,6 +51,7 @@ let validationErrors = [];
 let id = 0;
 const screenWidth = window.innerWidth;
 let everythingWasDeleted = false;
+let breakCounter = 0;
 
 // Funkcja pokazuje ustawienia
 const showSettings = () => {
@@ -364,6 +365,9 @@ const handleRewidnBtn = () => {
 			playIcon.classList.remove('fa-play');
 			playIcon.classList.add('fa-pause');
 		}
+		if (blindsData.bigBlind[i] === 'BREAK') {
+			breakCounter = breakCounter - 2;
+		}
 	}
 
 	checkRewindBtn();
@@ -543,13 +547,17 @@ const updateInputsFontSize = (input) => {
 };
 
 // Funckja ustawia wysokość blindów, teraźniejszych i przyszłych oraz ante w warstwie wizualnej
+
 const setBlinds = () => {
 	if (blindsData.bigBlind[i] === 'BREAK') {
+		breakCounter++;
 		currentBlinds.textContent = 'BREAK';
+		currentLevel.textContent = 'BREAK';
 	} else {
 		currentBlinds.textContent = `${formatBlind(
 			blindsData.bigBlind[i]
 		)}/${formatBlind(blindsData.smallBlind[i])}`;
+		currentLevel.textContent = i + 1 - breakCounter;
 	}
 
 	if (blindsData.ante[i] === 'BREAK') {
@@ -566,7 +574,6 @@ const setBlinds = () => {
 			blindsData.bigBlind[i + 1]
 		)}/${formatBlind(blindsData.smallBlind[i + 1])}`;
 	}
-	currentLevel.textContent = i + 1;
 };
 
 // Funkcja do zapisania  divów w localStorage
