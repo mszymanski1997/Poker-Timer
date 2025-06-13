@@ -1,20 +1,29 @@
-# Poker Timer
+# ♠️ Poker Timer
 
-## Project Description
+**Poker Timer** is a web application designed to manage small poker tournaments — especially home games.
 
-Poker Timer will be a web application designed to streamline the organization of poker tournaments. Its core features include:
+## ✨ Features
 
-- Displaying current blinds.
-- Calculating average stacks.
-- Showing payouts for players.
-- A user-friendly interface.
+- ✅ Set blind levels and their durations manually.
+- ⏰ Blinds automatically increase based on your chosen increment and time interval (e.g. from 10/5 to 20/10 to 30/15 every 25 minutes).
+- ✏️ Supports any values the user wants — fully customizable.
+- 💾 Stores all settings in **localStorage** so you don’t have to re-enter them each time.
+- ♻️ All data can be modified **at any time**, even while the game is in progress.
+- 💡 Fully responsive design — works seamlessly on **desktop, tablet, and mobile devices**.
 
-## Technologies Used
+## 📈 Displays (among others):
 
-The project is building with the following technologies:
+- 🎲 Current and upcoming blind levels
+- 📊 Average stack size
+- 🌐 Total chips in play
+- 💰 Payout structure
 
-- HTML5: for the structure of the application.
-- SCSS (BEM methodology): for modular and maintainable styling.
-- JavaScript (ES6+): for dynamic functionality.
+## 🛠️ Built With
 
-Note: This project is currently designed for desktop use only. Mobile compatibility will be added in future updates, project is still under development. Some features may be incomplete or subject to change.
+- **HTML**
+- **SCSS**
+- **JavaScript**
+
+## 🔗 Live Demo
+
+👉 [Try Poker Timer here](https://mizerykordia7312.github.io/Poker-Timer/)

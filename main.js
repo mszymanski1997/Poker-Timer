@@ -53,7 +53,8 @@ const screenWidth = window.innerWidth;
 let everythingWasDeleted = false;
 let breakCounter = 0;
 
-// Funkcja pokazuje ustawienia
+// Function displays the settings
+
 const showSettings = () => {
 	settings.classList.remove('animation-hide-start');
 	settings.classList.add('animation-start');
@@ -76,7 +77,8 @@ const showSettings = () => {
 	});
 };
 
-// Funkcja umożliwia edycje długości obecnego blinda poprzez zwiększenie lub zmniejszenie jego o róznice nowego
+// Function allows editing the current blind duration by increasing or decreasing it based on the difference from the new one
+
 const dynamicChangeOfDuration = (newTime) => {
 	if (isNaN(parseInt(newTime))) {
 		console.warn('Błędna wartość inputa:', newTime);
@@ -117,7 +119,8 @@ const dynamicChangeOfDuration = (newTime) => {
 	timerCounter.textContent = `${minutes}:${seconds}`;
 };
 
-// Funkcja uzupełnia tablice z blindami i ich długością, nadpisuje zmienną time
+// Function fills the arrays with blinds and their durations, overwriting the time variable
+
 const fillBlindsObject = () => {
 	blindsData.bigBlind = [];
 	blindsData.ante = [];
@@ -164,7 +167,8 @@ const fillBlindsObject = () => {
 	});
 };
 
-// Funkcja sprawdza czy w tablicach już coś jest, jeśli nie to wyłącza btn do ich cofania
+// Function checks if the arrays already contain elements; if not, it disables the button for undoing
+
 const checkRewindBtn = () => {
 	if (i == 0) {
 		rewindBtn.disabled = true;
@@ -179,7 +183,8 @@ const checkRewindBtn = () => {
 	}
 };
 
-// Funkcja chowa ustawienia, sprawdza czy można je dalej edytować, jeśli tak to pokazuje je na strone. Daje też zabezpieczenie że jeżeli następny blind nie jest określony to dodaje ostrzeżenie
+// Function hides the settings, checks if they can still be edited, and if so, displays them on the page. It also adds a warning if the next blind is not defined.
+
 const hideSettings = () => {
 	fillBlindsObject();
 
@@ -258,7 +263,8 @@ const hideSettings = () => {
 	}
 };
 
-// Funkcja umieszcza wartości po bokach timera
+// Function places values on the sides of the timer
+
 const setValues = () => {
 	buyIns.textContent = buyInsInput.value;
 	rebuys.textContent = rebuysInput.value;
@@ -285,7 +291,8 @@ const setValues = () => {
 	secondReward.textContent = `2. ${Math.round(totalMoneyValue * 0.3)}zł`;
 };
 
-// Funkcja obsługuje zarządzenie btn play/pause
+// Function handles the play/pause button control
+
 const handlePlayBtn = () => {
 	if (playIcon.classList.contains('fa-play')) {
 		playIcon.classList.remove('fa-play');
@@ -298,7 +305,8 @@ const handlePlayBtn = () => {
 	}
 };
 
-// Funkcja odpowiada za dzaiałanie timera
+// Function is responsible for the timer operation
+
 const countTime = () => {
 	let minutes = Math.floor(time / 60);
 	let seconds = time % 60;
@@ -330,7 +338,9 @@ const countTime = () => {
 		}
 	}
 };
-// Funkcja przełącza blindy na następne
+
+// Function switches the blinds to the next ones
+
 const changeBlinds = () => {
 	if (i >= blindsData.bigBlind.length && i > 0) {
 		clearInterval(timerInterval);
@@ -352,7 +362,8 @@ const changeBlinds = () => {
 	}
 };
 
-// Funkcja obsługuje rewindBtn
+// Function handles the rewind button
+
 const handleRewidnBtn = () => {
 	if (i <= 0) {
 		return;
@@ -373,7 +384,8 @@ const handleRewidnBtn = () => {
 	checkRewindBtn();
 };
 
-// Funkcja obsługuje forwardBtn
+// Function handles the forward button
+
 const handleForwardBtn = () => {
 	if (i + 1 >= blindsData.duration.length) {
 		return;
@@ -397,7 +409,8 @@ const handleForwardBtn = () => {
 	}
 };
 
-// Funkcja dodaje nową przerwe
+// Function adds a new break
+
 const addBreak = () => {
 	let newBlinds = document.createElement('div');
 	newBlinds.setAttribute(
@@ -420,7 +433,8 @@ const addBreak = () => {
 	);
 };
 
-// Funkcja diva z ustawieniami wizualnie i jego dane z obiektów
+// Function renders the settings div visually along with its data from objects
+
 const removeSettingsDiv = (e) => {
 	const settingDiv = e.target.closest('.settings-div');
 	const removedId = parseInt(settingDiv.id, 10);
@@ -461,7 +475,8 @@ const removeSettingsDiv = (e) => {
 	}
 };
 
-// Funckja otwiera modal
+// Function opens the modal
+
 const showBreakModal = () => {
 	breakModal.showModal();
 	settings.classList.add('modal-open');
@@ -470,7 +485,8 @@ const showBreakModal = () => {
 	isValid = true;
 };
 
-// Funkcja zamyka modal
+// Function closes the modal
+
 const closeModal = () => {
 	breakModal.close();
 	settings.classList.remove('modal-open');
@@ -478,7 +494,8 @@ const closeModal = () => {
 	addBreakBtn.classList.remove('modal-open');
 };
 
-// Funkcja dodaje nowe blindy w ustawieniach
+// Function adds new blinds in the settings
+
 const addNewBlinds = () => {
 	let newBlinds = document.createElement('div');
 	newBlinds.setAttribute('class', 'blinds-settings settings-div');
@@ -516,7 +533,8 @@ const addNewBlinds = () => {
 	addIds();
 };
 
-// Funkcja zmniejsza czcionkę w inpucie w zależnośći od roździelczości i liczby cyfr w nim
+// Function decreases the font size in the input depending on the resolution and the number of digits in it
+
 const updateInputsFontSize = (input) => {
 	const inputNumber = parseInt(input.value);
 
@@ -546,7 +564,7 @@ const updateInputsFontSize = (input) => {
 	}
 };
 
-// Funckja ustawia wysokość blindów, teraźniejszych i przyszłych oraz ante w warstwie wizualnej
+// Function sets the height of blinds, current and future, as well as the ante in the visual layer
 
 const setBlinds = () => {
 	if (blindsData.bigBlind[i] === 'BREAK') {
@@ -576,7 +594,8 @@ const setBlinds = () => {
 	}
 };
 
-// Funkcja do zapisania  divów w localStorage
+// Function to save div elements in localStorage
+
 const saveToLocalStorage = () => {
 	const settingsData = [];
 	const allSettings = document.querySelectorAll('.settings-div');
@@ -604,7 +623,8 @@ const saveToLocalStorage = () => {
 	localStorage.setItem('settingsData', JSON.stringify(settingsData));
 };
 
-// Funkcja do odtworzenia divów z localStorage
+// Function to restore div elements from localStorage
+
 const loadFromLocalStorage = () => {
 	const settingsData = JSON.parse(localStorage.getItem('settingsData')) || [];
 
@@ -660,7 +680,8 @@ const loadFromLocalStorage = () => {
 	);
 };
 
-// Funkcja formatuje blindy żeby znp zamiast 1000000 pokazywały 1M
+// Function formats blinds to display abbreviations like 1M instead of 1000000
+
 const formatBlind = (value) => {
 	if (value >= 1000000) {
 		return (value / 1000000).toFixed(1).replace('.0', '') + 'M';
@@ -670,7 +691,8 @@ const formatBlind = (value) => {
 	return value;
 };
 
-// Funkcja dodaję id dla dynamicznie pojawiających sie divów z blindami lub przerwami
+// Function adds IDs for dynamically appearing divs with blinds or breaks
+
 const addIds = () => {
 	id = 0;
 	const allSettingsDivs = document.querySelectorAll('.settings-div');
@@ -678,7 +700,6 @@ const addIds = () => {
 		settingDiv.id = id;
 		id++;
 	});
-	console.log(allSettingsDivs);
 };
 
 checkRewindBtn();
