@@ -26,4 +26,4 @@
 
 ## 🔗 Live Demo
 
-👉 [Try Poker Timer here](https://mizerykordia7312.github.io/Poker-Timer/)
+👉 [Try Poker Timer here](https://mszymanski1997.github.io/Poker-Timer/)
